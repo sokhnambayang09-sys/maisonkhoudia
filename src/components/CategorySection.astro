@@ -3,40 +3,60 @@ import { categories } from '../data/products.js';
 interface Props { title?: string; subtitle?: string; showAll?: boolean; }
 const { title = "Nos Collections", subtitle = "Explorez notre univers", showAll = true } = Astro.props;
 ---
-<section class="py-20 px-4 sm:px-6 lg:px-8 bg-cream-light" aria-labelledby="categories-heading">
+<section id="collections" class="py-24 px-4 sm:px-6 lg:px-8 bg-cream-light" aria-labelledby="categories-heading">
   <div class="max-w-8xl mx-auto">
-    <div class="text-center mb-14 reveal">
+
+    <div class="text-center mb-16 reveal">
       <p class="section-subheading mb-3">{subtitle}</p>
       <h2 id="categories-heading" class="section-heading">{title}</h2>
       <div class="gold-divider"></div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {categories.map((cat, index) => (
-        <a href={cat.href} class="group relative overflow-hidden block reveal" style={`animation-delay: ${index * 100}ms`} aria-label={`Voir ${cat.name}`}>
+        <a
+          href={cat.href}
+          class="cat-card group relative overflow-hidden block reveal"
+          style={`animation-delay: ${index * 80}ms; transition-delay: ${index * 80}ms;`}
+          aria-label={`Voir ${cat.name}`}
+        >
+          <!-- Image -->
           {cat.image ? (
-            <img src={cat.image} alt={cat.name} class="aspect-[3/4] w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <img
+              src={cat.image}
+              alt={cat.name}
+              class="cat-img aspect-[3/4] w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              loading="lazy"
+            />
           ) : (
-            <div class={`${cat.gradient} aspect-[3/4] w-full transition-transform duration-500 group-hover:scale-105`}></div>
+            <div class={`cat-img ${cat.gradient} aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.06]`}></div>
           )}
-          <div class="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/20 to-transparent transition-all duration-300 group-hover:from-brown/90"></div>
-          <div class="absolute inset-4 border border-gold/0 group-hover:border-gold/40 transition-all duration-500"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-            <div class="flex items-center gap-2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span class="w-8 h-px bg-gold"></span>
-              <span class="font-sans text-[10px] tracking-widest uppercase text-gold">{cat.count} Articles</span>
+
+          <!-- Dark overlay on hover -->
+          <div class="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/25 to-transparent transition-all duration-500 group-hover:from-brown/92 group-hover:via-brown/40"></div>
+
+          <!-- Gold border on hover -->
+          <div class="absolute inset-3 border border-gold/0 group-hover:border-gold/35 transition-all duration-500"></div>
+
+          <!-- Content -->
+          <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-400">
+            <div class="flex items-center gap-2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+              <span class="w-6 h-px bg-gold"></span>
+              <span class="font-sans text-[9px] tracking-[0.25em] uppercase text-gold">{cat.count} Articles</span>
             </div>
-            <h3 class="font-serif text-2xl font-bold text-cream-light mb-1">{cat.name}</h3>
-            <p class="font-sans text-xs text-cream-light/70 leading-relaxed mb-4 max-h-0 group-hover:max-h-12 overflow-hidden transition-all duration-300">{cat.description}</p>
-            <div class="flex items-center gap-2">
-              <span class="font-sans text-xs tracking-wider uppercase text-gold font-medium">Découvrir</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold transform group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <h3 class="font-serif text-2xl font-semibold text-cream-light mb-1 leading-tight">{cat.name}</h3>
+            <p class="font-sans text-xs text-cream-light/65 leading-relaxed mb-4 max-h-0 group-hover:max-h-10 overflow-hidden transition-all duration-400">{cat.description}</p>
+            <div class="flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="font-sans text-[10px] tracking-[0.2em] uppercase text-gold font-medium">Découvrir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold transform group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
         </a>
       ))}
     </div>
+
     {showAll && (
-      <div class="text-center mt-12 reveal">
+      <div class="text-center mt-14 reveal">
         <a href="/boutique" class="btn-secondary group">
           Voir Toutes les Collections
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
