@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Logo -->
       <a href="/" class="flex-shrink-0" aria-label="Maison Khoudia">
-        <img id="main-logo" src="/logo.png" alt="Maison Khoudia" class="h-16 md:h-20 w-auto object-contain transition-all duration-500 hover:opacity-80" style="filter: brightness(0) invert(1);" loading="eager" />
+        <img id="main-logo" src="/logo.png" alt="Maison Khoudia" class="h-16 md:h-20 w-auto object-contain transition-all duration-500 hover:opacity-80" style="mix-blend-mode: multiply;" loading="eager" />
       </a>
 
       <!-- Desktop nav -->
@@ -99,7 +99,7 @@ const currentPath = Astro.url.pathname;
 <!-- Mobile menu -->
 <nav id="mobile-menu" class="mobile-menu lg:hidden" role="navigation" aria-hidden="true">
   <div class="flex items-center justify-between p-6 border-b border-cream-dark">
-    <img src="/logo.png" alt="Maison Khoudia" class="h-14 w-auto object-contain" />
+    <img src="/logo.png" alt="Maison Khoudia" class="h-14 w-auto object-contain" style="mix-blend-mode: multiply;" />
     <button onclick="closeMobileMenu()" class="w-10 h-10 flex items-center justify-center text-luxury-gray hover:text-gold transition-colors" aria-label="Fermer">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
@@ -195,14 +195,7 @@ const currentPath = Astro.url.pathname;
       headerBg.style.boxShadow      = scrolled ? '0 2px 20px rgba(0,0,0,0.07)' : 'none';
     }
 
-    // Logo : blanc sur hero sombre, couleurs réelles sur header blanc
-    const logo = document.getElementById('main-logo') as HTMLElement;
-    if (logo) {
-      logo.style.transition = 'filter 0.4s ease';
-      logo.style.filter = scrolled
-        ? 'none'                           // couleurs originales (or) sur fond blanc
-        : 'brightness(0) invert(1)';       // logo blanc pur sur hero sombre
-    }
+    // Logo couleur via mix-blend-mode (géré en CSS, pas besoin de JS)
   }, { passive: true });
 
   (window as any).toggleMobileMenu = toggleMobileMenu;
