@@ -34,13 +34,13 @@ import { products, categories, formatPrice } from '../../data/products.js';
     <div class="max-w-8xl mx-auto">
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
         {categories.map(cat => (
-          <a href={cat.href} class="group relative overflow-hidden block">
+          <a href={cat.href} class="group relative overflow-hidden block rounded-2xl">
             {cat.image ? (
               <img src={cat.image} alt={cat.name} class="aspect-square w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             ) : (
               <div class={`${cat.gradient} aspect-square w-full transition-transform duration-500 group-hover:scale-105`}></div>
             )}
-            <div class="absolute inset-0 bg-gradient-to-t from-brown/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brown/80 to-transparent rounded-2xl"></div>
             <div class="absolute bottom-0 left-0 right-0 p-4">
               <h3 class="font-serif text-xl font-bold text-cream-light">{cat.name}</h3>
               <p class="font-sans text-xs text-gold">{cat.count} articles</p>
