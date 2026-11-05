@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Newsletter from '../components/Newsletter.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Notre Histoire — Maison Khoudia">
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden" style="min-height:70vh;">
+    <img src="/fondatrice.png" alt="Fondatrice Maison Khoudia" class="absolute inset-0 w-full h-full object-cover object-top" />
+    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(44,24,16,0.92) 0%,rgba(44,24,16,0.65) 50%,rgba(44,24,16,0.2) 100%);"></div>
+    <div class="relative z-10 flex items-center min-h-[70vh] px-4 sm:px-6 lg:px-8">
+      <div class="max-w-8xl mx-auto w-full">
+        <nav class="breadcrumb mb-8">
+          <a href="/" class="text-cream-light/50 hover:text-gold transition-colors">Accueil</a>
+          <span class="text-gold/40">›</span>
+          <span class="text-gold">Notre Histoire</span>
+        </nav>
+        <div class="max-w-lg">
+          <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-4">Fondée avec passion</p>
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.95] mb-6">
+            Notre<br/><em class="text-gold not-italic">Histoire</em>
+          </h1>
+          <div class="w-10 h-px bg-gold mb-6"></div>
+          <p class="font-sans text-cream-light/60 text-base leading-relaxed max-w-sm">
+            Une passion pour la mode africaine, un engagement envers l'excellence et l'authenticité.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Histoire principale -->
+  <section class="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-8xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div class="relative reveal">
+          <img src="/fondatrice.png" alt="Fondatrice" class="w-full object-cover object-top aspect-[3/4] max-w-md mx-auto" loading="lazy" />
+          <div class="absolute -bottom-5 -right-5 bg-gold px-6 py-5 shadow-luxury-md">
+            <div class="font-serif text-lg font-bold text-brown">CEO</div>
+            <div class="font-sans text-[10px] text-brown/80 tracking-wider mt-0.5">Maison Khoudia</div>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-subheading mb-4">Depuis 2012</p>
+          <h2 class="section-heading mb-6">L'Art de la Mode<br/><em class="text-gold not-italic">Africaine</em></h2>
+          <div class="gold-divider-left mb-8"></div>
+          <p class="font-sans text-luxury-gray text-base leading-relaxed mb-5">
+            Fondée avec passion, Maison Khoudia est née d'un rêve simple : rendre la haute mode accessible tout en célébrant les richesses de la culture africaine.
+          </p>
+          <p class="font-sans text-luxury-gray text-base leading-relaxed mb-5">
+            Chaque création raconte une histoire — celle d'une femme, d'un homme, d'une famille qui porte en lui l'élégance comme seconde nature. Nos vêtements ne sont pas seulement des pièces de mode ; ils sont des expressions d'identité, de fierté et de beauté.
+          </p>
+          <p class="font-sans text-luxury-gray text-base leading-relaxed mb-10">
+            Aujourd'hui, Maison Khoudia habille des centaines de familles à travers l'Afrique, avec le même soin et la même attention aux détails qui ont guidé nos débuts.
+          </p>
+          <a href="/boutique" class="btn-primary group">
+            Voir nos Collections
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos Valeurs -->
+  <section class="py-24 px-4 sm:px-6 lg:px-8 bg-cream">
+    <div class="max-w-8xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="section-subheading mb-3">Ce qui nous guide</p>
+        <h2 class="section-heading">Nos Valeurs</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {[
+          { icon:"◈", title:"Excellence",      desc:"Chaque couture, chaque tissu est sélectionné avec le plus grand soin pour garantir une qualité irréprochable." },
+          { icon:"◈", title:"Authenticité",    desc:"Nos créations puisent dans les traditions vestimentaires africaines pour en faire rayonner la beauté." },
+          { icon:"◈", title:"Accessibilité",   desc:"La haute mode doit être à la portée de tous. Nous offrons l'élégance sans compromis sur le prix." },
+          { icon:"◈", title:"Sur Mesure",      desc:"Chaque client est unique. Nous créons des pièces qui s'adaptent à votre morphologie et votre personnalité." },
+        ].map((v, i) => (
+          <div class="reveal" style={`animation-delay:${i*100}ms`}>
+            <div class="text-gold text-2xl mb-5">{v.icon}</div>
+            <div class="w-8 h-px bg-gold mb-5"></div>
+            <h3 class="font-serif text-lg font-semibold text-luxury-black mb-3">{v.title}</h3>
+            <p class="font-sans text-sm text-luxury-gray leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Chiffres clés -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-brown">
+    <div class="max-w-8xl mx-auto">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        {[
+          { n:"2012",    label:"Année de création" },
+          { n:"500+",    label:"Clients satisfaits" },
+          { n:"12+",     label:"Années d'expertise" },
+          { n:"4",       label:"Collections" },
+        ].map((s, i) => (
+          <div class="reveal" style={`animation-delay:${i*100}ms`}>
+            <div class="font-serif text-5xl sm:text-6xl font-bold text-gold mb-2">{s.n}</div>
+            <div class="font-sans text-xs tracking-[0.2em] uppercase text-cream-light/50">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagements -->
+  <section class="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-8xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="section-subheading mb-3">Notre promesse</p>
+        <h2 class="section-heading">Nos Engagements</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {[
+          { title:"Qualité Premium",      desc:"Tissus nobles sélectionnés à la source — bazin, brocart, soie, et créations exclusives." },
+          { title:"Artisanat Local",       desc:"Chaque pièce est confectionnée par nos artisans locaux formés aux techniques traditionnelles." },
+          { title:"Livraison Partout",     desc:"Nous livrons dans tout le Sénégal et en Afrique de l'Ouest. À partir de 2 000 FCFA." },
+          { title:"Satisfaction Garantie", desc:"Votre satisfaction est notre priorité. Nous accompagnons chaque commande du début à la livraison." },
+        ].map((e, i) => (
+          <div class="flex items-start gap-5 p-6 bg-cream-light border border-cream-dark hover:border-gold transition-colors duration-300 reveal" style={`animation-delay:${i*100}ms`}>
+            <span class="text-gold text-xl flex-shrink-0 mt-0.5">◈</span>
+            <div>
+              <h3 class="font-serif text-base font-semibold text-luxury-black mb-2">{e.title}</h3>
+              <p class="font-sans text-sm text-luxury-gray leading-relaxed">{e.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Newsletter variant="dark" />
+  <Footer />
+</Layout>

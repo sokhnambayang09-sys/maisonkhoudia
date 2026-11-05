@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Footer from '../../components/Footer.astro';
+import { products, categories, formatPrice } from '../../data/products.js';
+---
+<Layout title="Boutique — Maison Khoudia">
+  <div class="bg-brown py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-8xl mx-auto">
+      <nav class="breadcrumb mb-6"><a href="/" class="text-cream-light/50 hover:text-gold">Accueil</a><span class="text-gold/40">›</span><span class="text-gold">Boutique</span></nav>
+      <h1 class="font-serif text-4xl sm:text-5xl font-bold text-cream-light mb-4">Toute la Boutique</h1>
+      <p class="font-sans text-cream-light/60 text-base max-w-lg">Explorez toutes nos collections — mode femme, homme, enfants et accessoires de luxe.</p>
+    </div>
+  </div>
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-8xl mx-auto">
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {categories.map(cat => (
+          <a href={cat.href} class="group relative overflow-hidden block">
+            {cat.image ? (
+              <img src={cat.image} alt={cat.name} class="aspect-square w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            ) : (
+              <div class={`${cat.gradient} aspect-square w-full transition-transform duration-500 group-hover:scale-105`}></div>
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-brown/80 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h3 class="font-serif text-xl font-bold text-cream-light">{cat.name}</h3>
+              <p class="font-sans text-xs text-gold">{cat.count} articles</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <h2 class="font-serif text-3xl font-bold text-luxury-black mb-8">Tous les Articles</h2>
+      <div class="product-grid">
+        {products.map(product => <ProductCard {...product} />)}
+      </div>
+    </div>
+  </section>
+  <Footer />
+</Layout>

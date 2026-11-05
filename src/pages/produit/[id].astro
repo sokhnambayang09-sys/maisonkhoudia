@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import { products, formatPrice } from '../../data/products.js';
+
+export function getStaticPaths() {
+  return products.map(product => ({ params: { id: String(product.id) }, props: { product } }));
+}
+const { product } = Astro.props;
+const colorMap: Record<string,string> = {
+  rose:'#F4A7B9', beige:'#E8D5B5', noir:'#1A1A1A', bordeaux:'#722F37',
+  marine:'#1B3A5C', camel:'#C19A6B', gris:'#808080', blanc:'#FFFFFF',
+  bleu:'#4A7AB5', violet:'#8B4B8B', fuschia:'#FF1694', or:'#D4AF37',
+  argent:'#C0C0C0', vert:'#3D7D4A',
+};
+const gradientStyles: Record<string,string> = {
+  'img-placeholder-pink': 'background:linear-gradient(135deg,#F8E1E7 0%,#EDD5C0 50%,#D4AF37 100%)',
+  'img-placeholder-beige':'background:linear-gradient(135deg,#F5EBD8 0%,#E8D5B5 50%,#C9A84C 100%)',
+  'img-placeholder-dark': 'background:linear-gradient(135deg,#2C1810 0%,#4A2C1A 60%,#8B6347 100%)',
+  'img-placeholder-rose': 'background:linear-gradient(135deg,#FADADD 0%,#F5B8C0 50%,#E8968A 100%)',
+  'img-placeholder-gold': 'background:linear-gradient(135deg,#F0E4A0 0%,#D4AF37 50%,#B8962E 100%)',
+  'img-placeholder-mauve':'background:linear-gradient(135deg,#E8D5E8 0%,#C9A8C9 50%,#9B6B9B 100%)',
+  'img-placeholder-navy': 'background:linear-gradient(135deg,#D5DCE8 0%,#A8B5C9 50%,#4A5C8B 100%)',
+};
+const whatsappPhone = '221774844267';
+---
+<Layout title={`${product.name} — Maison Khoudia`}>
+  <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <nav class="breadcrumb mb-8">
+      <a href="/">Accueil</a><span class="text-gold">›</span>
+      <a href="/boutique">Boutique</a><span class="text-gold">›</span>
+      <a href={`/boutique/${product.category}`} class="capitalize">{product.category}</a><span class="text-gold">›</span>
+      <span class="text-gold truncate max-w-[200px]">{product.name}</span>
+    </nav>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+      <div>
+        <div class="relative overflow-hidden aspect-[3/4]" style={gradientStyles[product.gradient] || gradientStyles['img-placeholder-beige']}>
+          {product.new && <span class="badge-new">Nouveau</span>}
+          {product.bestseller && <span class="badge-bestseller">Best Seller</span>}
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-sans text-xs tracking-widest uppercase text-gold font-medium capitalize mb-3">{product.category} · {product.subcategory}</span>
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-luxury-black leading-tight mb-4">{product.name}</h1>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="flex gap-0.5">{Array(4).fill(null).map(() => <span class="text-gold">★</span>)}<span class="text-cream-dark">★</span></div>
+          <span class="font-sans text-sm text-luxury-gray">(4.5) · 24 avis</span>
+        </div>
+        <div class="flex items-baseline gap-3 mb-6 pb-6 border-b border-cream-dark">
+          <span class="font-serif text-3xl font-bold text-luxury-black">{formatPrice(product.price)}</span>
+        </div>
+        {product.colors.length > 0 && (
+          <div class="mb-6">
+            <span class="font-sans text-sm font-medium text-luxury-black uppercase tracking-wider block mb-3">Couleur: <span id="sel-color" class="text-gold capitalize">{product.colors[0]}</span></span>
+            <div class="flex flex-wrap gap-3">
+              {product.colors.map((color: string, i: number) => (
+                <button class={`color-swatch ${i===0?'selected':''}`} style={`background-color:${colorMap[color]||'#ccc'}`} data-color={color} onclick="selectColor(this)" title={color}></button>
+              ))}
+            </div>
+          </div>
+        )}
+        {product.sizes.length > 0 && product.sizes[0] !== 'unique' && (
+          <div class="mb-6">
+            <span class="font-sans text-sm font-medium text-luxury-black uppercase tracking-wider block mb-3">Taille: <span id="sel-size" class="text-gold">{product.sizes[0]}</span></span>
+            <div class="flex flex-wrap gap-2">
+              {product.sizes.map((size: string, i: number) => (
+                <button class={`size-btn ${i===0?'selected':''}`} data-size={size} onclick="selectSize(this)">{size}</button>
+              ))}
+            </div>
+          </div>
+        )}
+        <div class="mb-8">
+          <span class="font-sans text-sm font-medium text-luxury-black uppercase tracking-wider block mb-3">Quantité</span>
+          <div class="flex items-center">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span id="qty-display" class="w-14 h-10 flex items-center justify-center border-y border-cream-dark font-sans font-semibold">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 mb-8">
+          <button id="add-cart-btn" class="btn-primary flex-1 justify-center" onclick="addToCartLocal()">Ajouter au Panier</button>
+          <button class="btn-dark flex-1 justify-center" onclick="buyNow()">Commander Maintenant</button>
+        </div>
+        <div class="space-y-3">
+          {[
+            { text:"Livraison disponible à partir de 2 000 FCFA" },
+            { text:"Paiement 100% sécurisé" },
+            { text:"Qualité garantie" },
+          ].map(b => (
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <span class="font-sans text-sm text-luxury-gray">{b.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<script define:vars={{ product, whatsappPhone }}>
+  let qty = 1;
+  let selectedColor = product.colors[0] || '';
+  let selectedSize  = product.sizes[0] || 'unique';
+
+  function changeQty(d) { qty = Math.max(1, Math.min(99, qty + d)); document.getElementById('qty-display').textContent = qty; }
+  function selectColor(btn) {
+    selectedColor = btn.dataset.color;
+    document.querySelectorAll('.color-swatch').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('selected'); btn.setAttribute('aria-pressed','true');
+    document.getElementById('sel-color').textContent = selectedColor;
+  }
+  function selectSize(btn) {
+    if(btn.classList.contains('unavailable')) return;
+    selectedSize = btn.dataset.size;
+    document.querySelectorAll('.size-btn').forEach(b => { b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    document.getElementById('sel-size').textContent = selectedSize;
+  }
+  function addToCartLocal() { window.showToast?.('Ajouté au panier ✓'); }
+  function buyNow() {
+    const color = selectedColor ? `\nCouleur : ${selectedColor}` : '';
+    const size  = (selectedSize && selectedSize !== 'unique') ? `\nTaille : ${selectedSize}` : '';
+    const msg = `Bonjour Maison Khoudia 👋\n\nJe souhaite commander :\n\n🛍️ *${product.name}*\nPrix : ${product.price.toLocaleString('fr-FR')} FCFA${color}${size}\nQuantité : ${qty}\n\nMerci !`;
+    window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+  window.changeQty = changeQty; window.selectColor = selectColor;
+  window.selectSize = selectSize; window.addToCartLocal = addToCartLocal; window.buyNow = buyNow;
+</script>

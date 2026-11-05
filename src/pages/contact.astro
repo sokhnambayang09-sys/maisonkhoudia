@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Contact — Maison Khoudia">
+
+  <!-- Hero -->
+  <div class="bg-brown pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 20% 50%, #D4AF37 0%, transparent 60%), radial-gradient(circle at 80% 20%, #D4AF37 0%, transparent 50%);"></div>
+    <div class="max-w-8xl mx-auto relative z-10">
+      <nav class="breadcrumb mb-8">
+        <a href="/" class="text-cream-light/50 hover:text-gold transition-colors">Accueil</a>
+        <span class="text-gold/40">›</span>
+        <span class="text-gold">Contact</span>
+      </nav>
+      <div class="max-w-lg">
+        <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-4">Nous sommes là pour vous</p>
+        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.95] mb-6">
+          Parlons<br/><em class="text-gold not-italic">Mode</em>
+        </h1>
+        <div class="w-10 h-px bg-gold mb-6"></div>
+        <p class="font-sans text-cream-light/55 text-base leading-relaxed">
+          Commandes, conseils stylistiques, créations sur mesure — notre équipe vous répond rapidement sur WhatsApp.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp CTA principal -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gold">
+    <div class="max-w-8xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="font-sans text-[11px] tracking-[0.2em] uppercase text-brown/60 mb-1">Réponse en moins de 2h</p>
+        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-brown">Contactez-nous directement</h2>
+      </div>
+      <a href="https://wa.me/221774844267?text=Bonjour%20Maison%20Khoudia%20%F0%9F%91%8B%0A%0AJe%20souhaite%20obtenir%20des%20informations." target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-8 py-4 bg-brown text-cream-light font-sans font-semibold text-sm tracking-widest uppercase hover:bg-brown-light transition-colors duration-300 whitespace-nowrap flex-shrink-0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.523 5.838L0 24l6.337-1.498A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 0 1-5.013-1.374l-.36-.213-3.73.881.937-3.613-.234-.37A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        +221 77 484 42 67
+      </a>
+    </div>
+  </section>
+
+  <!-- Formulaire + infos -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-8xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+
+        <!-- Formulaire -->
+        <div class="lg:col-span-3">
+          <p class="section-subheading mb-3">Formulaire</p>
+          <h2 class="font-serif text-3xl font-semibold text-luxury-black mb-8">Envoyez un Message</h2>
+          <form class="space-y-5" onsubmit="handleContact(event)">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="font-sans text-[10px] tracking-[0.2em] uppercase text-luxury-gray block mb-2">Prénom & Nom</label>
+                <input type="text" placeholder="Aminata Diallo" required class="w-full px-4 py-3.5 border border-cream-dark font-sans text-sm text-luxury-black bg-cream-light/50 focus:outline-none focus:border-gold focus:bg-white transition-all duration-200" />
+              </div>
+              <div>
+                <label class="font-sans text-[10px] tracking-[0.2em] uppercase text-luxury-gray block mb-2">Email</label>
+                <input type="email" placeholder="email@exemple.com" required class="w-full px-4 py-3.5 border border-cream-dark font-sans text-sm text-luxury-black bg-cream-light/50 focus:outline-none focus:border-gold focus:bg-white transition-all duration-200" />
+              </div>
+            </div>
+            <div>
+              <label class="font-sans text-[10px] tracking-[0.2em] uppercase text-luxury-gray block mb-2">Téléphone (optionnel)</label>
+              <input type="tel" placeholder="+221 77 000 00 00" class="w-full px-4 py-3.5 border border-cream-dark font-sans text-sm text-luxury-black bg-cream-light/50 focus:outline-none focus:border-gold focus:bg-white transition-all duration-200" />
+            </div>
+            <div>
+              <label class="font-sans text-[10px] tracking-[0.2em] uppercase text-luxury-gray block mb-2">Sujet</label>
+              <select class="w-full px-4 py-3.5 border border-cream-dark font-sans text-sm text-luxury-black bg-cream-light/50 focus:outline-none focus:border-gold focus:bg-white transition-all duration-200 appearance-none">
+                <option>Commande d'article</option>
+                <option>Création sur mesure</option>
+                <option>Information produit</option>
+                <option>Livraison & délais</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div>
+              <label class="font-sans text-[10px] tracking-[0.2em] uppercase text-luxury-gray block mb-2">Message</label>
+              <textarea rows="5" placeholder="Décrivez votre demande..." required class="w-full px-4 py-3.5 border border-cream-dark font-sans text-sm text-luxury-black bg-cream-light/50 focus:outline-none focus:border-gold focus:bg-white transition-all duration-200 resize-none"></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full justify-center">Envoyer le Message</button>
+          </form>
+        </div>
+
+        <!-- Infos -->
+        <div class="lg:col-span-2">
+          <p class="section-subheading mb-3">Coordonnées</p>
+          <h2 class="font-serif text-3xl font-semibold text-luxury-black mb-8">Restons en Contact</h2>
+
+          <div class="space-y-5">
+            <a href="https://wa.me/221774844267" target="_blank" rel="noopener" class="flex items-start gap-5 p-5 bg-cream-light border border-cream-dark hover:border-gold transition-colors duration-300 group">
+              <div class="w-11 h-11 bg-gold flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.523 5.838L0 24l6.337-1.498A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 0 1-5.013-1.374l-.36-.213-3.73.881.937-3.613-.234-.37A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              </div>
+              <div>
+                <div class="font-sans text-xs tracking-[0.15em] uppercase text-luxury-gray mb-1">WhatsApp</div>
+                <div class="font-serif text-base font-semibold text-luxury-black group-hover:text-gold transition-colors">+221 77 484 42 67</div>
+                <div class="font-sans text-xs text-luxury-gray mt-1">Disponible tous les jours · Réponse rapide</div>
+              </div>
+            </a>
+
+            <div class="p-5 bg-cream-light border border-cream-dark">
+              <div class="font-sans text-xs tracking-[0.15em] uppercase text-luxury-gray mb-1">Horaires</div>
+              <div class="font-serif text-base font-semibold text-luxury-black mb-1">Lun – Sam, 8h – 20h</div>
+              <div class="font-sans text-xs text-luxury-gray">Dimanche : 10h – 18h</div>
+            </div>
+
+            <div class="p-5 bg-cream-light border border-cream-dark">
+              <div class="font-sans text-xs tracking-[0.15em] uppercase text-luxury-gray mb-1">Livraison</div>
+              <div class="font-serif text-base font-semibold text-luxury-black mb-1">Dakar & environs</div>
+              <div class="font-sans text-xs text-luxury-gray">À partir de 2 000 FCFA · Délai 24-48h</div>
+            </div>
+
+            <div class="p-5 bg-brown">
+              <div class="font-sans text-xs tracking-[0.15em] uppercase text-gold/60 mb-1">Sur Mesure</div>
+              <div class="font-serif text-base font-semibold text-cream-light mb-2">Créations Personnalisées</div>
+              <p class="font-sans text-xs text-cream-light/60 leading-relaxed">Contactez-nous pour toute commande sur mesure. Délai de création : 7 à 14 jours.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+<script>
+  function handleContact(e: Event) {
+    e.preventDefault();
+    window.showToast?.('Message envoyé ! Nous vous répondrons sous 24h.');
+    (e.target as HTMLFormElement).reset();
+  }
+  (window as any).handleContact = handleContact;
+</script>
