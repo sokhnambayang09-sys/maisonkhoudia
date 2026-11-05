@@ -32,27 +32,108 @@ import { products, categories, formatPrice } from '../../data/products.js';
   </div>
   <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
     <div class="max-w-8xl mx-auto">
-      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-        {categories.map(cat => (
-          <a href={cat.href} class="group relative overflow-hidden block rounded-2xl">
-            {cat.image ? (
-              <img src={cat.image} alt={cat.name} class="aspect-square w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            ) : (
-              <div class={`${cat.gradient} aspect-square w-full transition-transform duration-500 group-hover:scale-105`}></div>
-            )}
-            <div class="absolute inset-0 bg-gradient-to-t from-brown/80 to-transparent rounded-2xl"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-4">
-              <h3 class="font-serif text-xl font-bold text-cream-light">{cat.name}</h3>
-              <p class="font-sans text-xs text-gold">{cat.count} articles</p>
-            </div>
-          </a>
+
+      <!-- Filtre catégories -->
+      <div class="flex flex-wrap items-center gap-2 mb-10">
+        {[{id:'all',name:'Tous'},...categories].map(cat => (
+          <button
+            class="filter-btn font-sans text-[11px] tracking-[0.18em] uppercase px-5 py-2.5 rounded-full border transition-all duration-200"
+            data-filter={cat.id}
+          >{cat.name}</button>
         ))}
       </div>
-      <h2 class="font-serif text-3xl font-bold text-luxury-black mb-8">Tous les Articles</h2>
-      <div class="product-grid">
-        {products.map(product => <ProductCard {...product} />)}
+
+      <div id="products-grid" class="product-grid">
+        {products.map(product => (
+          <div class="product-item" data-category={product.category}>
+            <ProductCard {...product} />
+          </div>
+        ))}
       </div>
+
+      <!-- Pagination -->
+      <div id="pagination" class="flex items-center justify-center gap-2 mt-14"></div>
+
     </div>
   </section>
   <Footer />
 </Layout>
+
+<style>
+  .filter-btn { background:#fff; color:#6B6B6B; border-color:#E8E0D5; }
+  .filter-btn:hover { border-color:#D4AF37; color:#D4AF37; }
+  .filter-btn.active { background:#D4AF37; color:#2C1810; border-color:#D4AF37; }
+  .page-btn { width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-family:sans-serif; font-size:13px; border:1px solid #E8E0D5; color:#6B6B6B; transition:all .2s; cursor:pointer; }
+  .page-btn:hover { border-color:#D4AF37; color:#D4AF37; }
+  .page-btn.active { background:#D4AF37; color:#2C1810; border-color:#D4AF37; font-weight:700; }
+  .page-btn:disabled { opacity:.35; cursor:default; }
+</style>
+
+<script>
+  const PER_PAGE = 12;
+  let currentPage = 1;
+  let activeFilter = 'all';
+
+  const allItems   = Array.from(document.querySelectorAll('.product-item')) as HTMLElement[];
+  const grid       = document.getElementById('products-grid')!;
+  const pagination = document.getElementById('pagination')!;
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  function getFiltered() {
+    return activeFilter === 'all'
+      ? allItems
+      : allItems.filter(el => el.dataset.category === activeFilter);
+  }
+
+  function render() {
+    const filtered  = getFiltered();
+    const totalPages = Math.ceil(filtered.length / PER_PAGE);
+    currentPage = Math.min(currentPage, totalPages || 1);
+    const start = (currentPage - 1) * PER_PAGE;
+    const end   = start + PER_PAGE;
+
+    // Show/hide items
+    allItems.forEach(el => { el.style.display = 'none'; });
+    filtered.slice(start, end).forEach(el => { el.style.display = ''; });
+
+    // Pagination buttons
+    pagination.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    const prev = document.createElement('button');
+    prev.className = 'page-btn';
+    prev.innerHTML = '‹';
+    prev.disabled = currentPage === 1;
+    prev.onclick = () => { currentPage--; render(); window.scrollTo({top:0,behavior:'smooth'}); };
+    pagination.appendChild(prev);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+      btn.textContent = String(i);
+      btn.onclick = ((_i) => () => { currentPage = _i; render(); window.scrollTo({top:0,behavior:'smooth'}); })(i);
+      pagination.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.className = 'page-btn';
+    next.innerHTML = '›';
+    next.disabled = currentPage === totalPages;
+    next.onclick = () => { currentPage++; render(); window.scrollTo({top:0,behavior:'smooth'}); };
+    pagination.appendChild(next);
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = (btn as HTMLElement).dataset.filter || 'all';
+      currentPage = 1;
+      render();
+    });
+  });
+
+  // Init
+  document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
+  render();
+</script>
