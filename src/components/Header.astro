@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Logo -->
       <a href="/" class="flex-shrink-0" aria-label="Maison Khoudia">
-        <img src="/logo.png" alt="Maison Khoudia" class="h-16 md:h-20 w-auto object-contain transition-all duration-300 hover:opacity-80" loading="eager" />
+        <img id="main-logo" src="/logo.png" alt="Maison Khoudia" class="h-16 md:h-20 w-auto object-contain transition-all duration-500 hover:opacity-80" style="filter: brightness(0) invert(1);" loading="eager" />
       </a>
 
       <!-- Desktop nav -->
@@ -195,9 +195,14 @@ const currentPath = Astro.url.pathname;
       headerBg.style.boxShadow      = scrolled ? '0 2px 20px rgba(0,0,0,0.07)' : 'none';
     }
 
-    // Logo + liens deviennent sombres sur fond blanc
-    const logo = headerEl?.querySelector('img') as HTMLElement;
-    if (logo) logo.style.filter = scrolled ? 'none' : 'none';
+    // Logo : blanc sur hero sombre, couleurs réelles sur header blanc
+    const logo = document.getElementById('main-logo') as HTMLElement;
+    if (logo) {
+      logo.style.transition = 'filter 0.4s ease';
+      logo.style.filter = scrolled
+        ? 'none'                           // couleurs originales (or) sur fond blanc
+        : 'brightness(0) invert(1)';       // logo blanc pur sur hero sombre
+    }
   }, { passive: true });
 
   (window as any).toggleMobileMenu = toggleMobileMenu;
