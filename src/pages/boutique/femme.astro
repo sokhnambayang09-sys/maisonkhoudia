@@ -6,14 +6,16 @@ import { products } from '../../data/products.js';
 const items = products.filter(p => p.category === 'femme');
 ---
 <Layout title="Collection Femme — Maison Khoudia">
-  <div class="relative overflow-hidden" style="min-height:40vh;">
-    <img src="/femme.jpg" alt="Collection Femme" class="absolute inset-0 w-full h-full object-cover object-top" />
+  <div class="relative overflow-hidden" style="min-height:48vh;">
+    <img src="/products/p13.jpg" alt="Collection Femme" class="absolute inset-0 w-full h-full object-cover object-center" />
     <div class="absolute inset-0" style="background:linear-gradient(to right, rgba(44,24,16,0.85) 0%, rgba(44,24,16,0.4) 60%, transparent 100%);"></div>
-    <div class="relative z-10 flex items-center min-h-[40vh] px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 flex items-center min-h-[48vh] px-4 sm:px-14 lg:px-24">
       <div class="max-w-8xl mx-auto w-full">
         <nav class="breadcrumb mb-4"><a href="/" class="text-cream-light/50 hover:text-gold">Accueil</a><span class="text-gold/40">›</span><a href="/boutique" class="text-cream-light/50 hover:text-gold">Boutique</a><span class="text-gold/40">›</span><span class="text-gold">Femme</span></nav>
-        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-cream-light mb-3">Collection Femme</h1>
-        <p class="font-sans text-cream-light/60">{items.length} articles disponibles</p>
+        <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-4">Maison Khoudia</p>
+        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.95] mb-5">Collection<br/><em class="text-gold not-italic">Femme</em></h1>
+        <div class="flex items-center gap-3 mb-4"><div class="w-8 h-px bg-gold"></div><span class="text-gold/50 text-xs">◈</span></div>
+        <p class="font-sans text-cream-light/60 text-sm">{items.length} articles disponibles</p>
       </div>
     </div>
   </div>
