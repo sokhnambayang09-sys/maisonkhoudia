@@ -25,11 +25,11 @@ const { title = "Nos Collections", subtitle = "Explorez notre univers", showAll 
             <img
               src={cat.image}
               alt={cat.name}
-              class="cat-img aspect-[3/4] w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              class="cat-img aspect-[4/3] sm:aspect-[3/4] w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
               loading="lazy"
             />
           ) : (
-            <div class={`cat-img ${cat.gradient} aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.06]`}></div>
+            <div class={`cat-img ${cat.gradient} aspect-[4/3] sm:aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.06]`}></div>
           )}
 
           <!-- Dark overlay on hover -->

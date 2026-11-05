@@ -53,7 +53,7 @@ const { ctaHref = "/boutique" } = Astro.props;
   </div>
 
   <!-- Ligne décorative gauche -->
-  <div class="absolute left-6 sm:left-8 lg:left-14 top-0 bottom-0 z-10 flex flex-col items-center justify-center gap-4 hero-sideline opacity-0">
+  <div class="absolute left-6 sm:left-8 lg:left-14 top-0 bottom-0 z-10 hidden sm:flex flex-col items-center justify-center gap-4 hero-sideline opacity-0">
     <div class="w-px h-16 bg-gradient-to-b from-transparent to-gold/40"></div>
     <span class="font-sans text-[7px] tracking-[0.4em] uppercase text-gold/40" style="writing-mode:vertical-rl;letter-spacing:0.4em;">Maison Khoudia</span>
     <div class="w-px h-16 bg-gradient-to-t from-transparent to-gold/40"></div>
@@ -61,7 +61,7 @@ const { ctaHref = "/boutique" } = Astro.props;
 
   <!-- Contenu principal -->
   <div class="relative z-10 h-full flex items-center">
-    <div class="max-w-8xl mx-auto px-10 sm:px-14 lg:px-24 w-full">
+    <div class="max-w-8xl mx-auto px-5 sm:px-14 lg:px-24 w-full">
       <div class="max-w-[680px]">
 
         <!-- Label -->
@@ -111,7 +111,7 @@ const { ctaHref = "/boutique" } = Astro.props;
         <!-- Description -->
         <div class="overflow-hidden mb-10">
           <div class="hero-line translate-y-full">
-            <p class="font-sans text-[0.9rem] text-cream-light/55 leading-[1.85] max-w-[38ch]">
+            <p class="font-sans text-[0.9rem] text-cream-light/55 leading-[1.85] max-w-full sm:max-w-[38ch]">
               Chaque création Maison Khoudia célèbre la richesse de notre culture, avec le raffinement que vous méritez.
             </p>
           </div>
@@ -121,7 +121,7 @@ const { ctaHref = "/boutique" } = Astro.props;
         <div class="overflow-hidden">
           <div class="hero-line translate-y-full flex flex-wrap items-center gap-5">
             <a href={ctaHref}
-              class="group relative inline-flex items-center gap-3 px-9 py-4 bg-gold text-brown font-sans font-semibold text-[11px] tracking-[0.25em] uppercase rounded-full overflow-hidden hover:-translate-y-0.5 hover:shadow-luxury-md transition-all duration-300">
+              class="group relative inline-flex items-center gap-3 px-6 py-3.5 sm:px-9 sm:py-4 bg-gold text-brown font-sans font-semibold text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.25em] uppercase rounded-full overflow-hidden hover:-translate-y-0.5 hover:shadow-luxury-md transition-all duration-300">
               <span class="relative z-10">Découvrir la Collection</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="relative z-10 transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               <div class="absolute inset-0 bg-gold-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
@@ -140,19 +140,19 @@ const { ctaHref = "/boutique" } = Astro.props;
 
   <!-- Barre stats bas -->
   <div class="hero-stats absolute bottom-0 left-0 right-0 z-10 opacity-0 translate-y-4" style="transition:opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1);">
-    <div class="max-w-8xl mx-auto px-10 sm:px-14 lg:px-24">
-      <div class="border-t border-cream-light/[0.08] py-5 flex items-center gap-8 sm:gap-16 overflow-x-auto scrollbar-none">
+    <div class="max-w-8xl mx-auto px-5 sm:px-14 lg:px-24">
+      <div class="border-t border-cream-light/[0.08] py-4 sm:py-5 grid grid-cols-2 sm:flex sm:items-center gap-y-3 gap-x-4 sm:gap-16">
         {[
           { n:"500+",  l:"Clients" },
           { n:"2000",  l:"FCFA livraison" },
           { n:"100%",  l:"Fait en Afrique" },
           { n:"Sur mesure", l:"Disponible" },
         ].map(s => (
-          <div class="flex-shrink-0 flex items-center gap-3">
-            <div class="w-px h-6 bg-gold/25"></div>
+          <div class="flex items-center gap-2 sm:gap-3">
+            <div class="w-px h-5 sm:h-6 bg-gold/25 flex-shrink-0"></div>
             <div>
-              <div class="font-serif text-base font-semibold text-gold leading-none">{s.n}</div>
-              <div class="font-sans text-[8px] tracking-[0.22em] uppercase text-cream-light/35 mt-0.5">{s.l}</div>
+              <div class="font-serif text-sm sm:text-base font-semibold text-gold leading-none">{s.n}</div>
+              <div class="font-sans text-[7px] sm:text-[8px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-cream-light/35 mt-0.5">{s.l}</div>
             </div>
           </div>
         ))}
