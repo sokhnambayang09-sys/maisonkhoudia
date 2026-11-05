@@ -3,52 +3,56 @@ import { categories } from '../data/products.js';
 interface Props { title?: string; subtitle?: string; showAll?: boolean; }
 const { title = "Nos Collections", subtitle = "Explorez notre univers", showAll = true } = Astro.props;
 ---
-<section id="collections" class="py-24 px-4 sm:px-6 lg:px-8 bg-cream-light" aria-labelledby="categories-heading">
+<section id="collections" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-cream-light" aria-labelledby="categories-heading">
   <div class="max-w-8xl mx-auto">
 
-    <div class="text-center mb-16 reveal">
+    <div class="text-center mb-10 sm:mb-16 reveal">
       <p class="section-subheading mb-3">{subtitle}</p>
       <h2 id="categories-heading" class="section-heading">{title}</h2>
       <div class="gold-divider"></div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <!-- Grid : 2 cols mobile, 4 cols desktop — cards arrondies -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
       {categories.map((cat, index) => (
         <a
           href={cat.href}
-          class="cat-card group relative overflow-hidden block reveal"
-          style={`animation-delay: ${index * 80}ms; transition-delay: ${index * 80}ms;`}
+          class="cat-card group relative overflow-hidden block reveal rounded-2xl"
+          style={`transition-delay: ${index * 80}ms;`}
           aria-label={`Voir ${cat.name}`}
         >
-          <!-- Image -->
           {cat.image ? (
             <img
               src={cat.image}
               alt={cat.name}
-              class="cat-img aspect-[4/3] sm:aspect-[3/4] w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              class="cat-img w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              style="aspect-ratio:3/4;"
               loading="lazy"
             />
           ) : (
-            <div class={`cat-img ${cat.gradient} aspect-[4/3] sm:aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.06]`}></div>
+            <div
+              class={`cat-img ${cat.gradient} w-full transition-transform duration-700 ease-out group-hover:scale-[1.06]`}
+              style="aspect-ratio:3/4;"
+            ></div>
           )}
 
-          <!-- Dark overlay on hover -->
-          <div class="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/25 to-transparent transition-all duration-500 group-hover:from-brown/92 group-hover:via-brown/40"></div>
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/15 to-transparent transition-all duration-500 group-hover:from-brown/92 rounded-2xl"></div>
 
           <!-- Gold border on hover -->
-          <div class="absolute inset-3 border border-gold/0 group-hover:border-gold/35 transition-all duration-500"></div>
+          <div class="absolute inset-2 border border-gold/0 group-hover:border-gold/40 transition-all duration-500 rounded-xl pointer-events-none"></div>
 
-          <!-- Content -->
-          <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-400">
-            <div class="flex items-center gap-2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-              <span class="w-6 h-px bg-gold"></span>
-              <span class="font-sans text-[9px] tracking-[0.25em] uppercase text-gold">{cat.count} Articles</span>
+          <!-- Contenu bas -->
+          <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-5">
+            <div class="flex items-center gap-1.5 mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="w-4 h-px bg-gold flex-shrink-0"></span>
+              <span class="font-sans text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-gold">{cat.count} Articles</span>
             </div>
-            <h3 class="font-serif text-2xl font-semibold text-cream-light mb-1 leading-tight">{cat.name}</h3>
-            <p class="font-sans text-xs text-cream-light/65 leading-relaxed mb-4 max-h-0 group-hover:max-h-10 overflow-hidden transition-all duration-400">{cat.description}</p>
-            <div class="flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-              <span class="font-sans text-[10px] tracking-[0.2em] uppercase text-gold font-medium">Découvrir</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold transform group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <h3 class="font-serif text-base sm:text-xl lg:text-2xl font-semibold text-cream-light leading-tight">{cat.name}</h3>
+            <p class="hidden sm:block font-sans text-xs text-cream-light/60 leading-relaxed mt-1 max-h-0 group-hover:max-h-10 overflow-hidden transition-all duration-400">{cat.description}</p>
+            <div class="flex items-center gap-1.5 mt-1.5 sm:mt-3">
+              <span class="font-sans text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-gold/80 font-medium">Voir</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-gold transform group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
         </a>
@@ -56,7 +60,7 @@ const { title = "Nos Collections", subtitle = "Explorez notre univers", showAll 
     </div>
 
     {showAll && (
-      <div class="text-center mt-14 reveal">
+      <div class="text-center mt-10 sm:mt-14 reveal">
         <a href="/boutique" class="btn-secondary group">
           Voir Toutes les Collections
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
