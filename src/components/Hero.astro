@@ -3,178 +3,247 @@ interface Props { ctaHref?: string; }
 const { ctaHref = "/boutique" } = Astro.props;
 ---
 
-<section class="hero-wrap relative h-screen min-h-[620px] overflow-hidden" aria-label="Hero — Maison Khoudia">
+<section class="hero relative h-screen min-h-[620px] overflow-hidden bg-brown" aria-label="Hero — Maison Khoudia">
 
-  <!-- Background image with Ken Burns -->
-  <img
-    src="/hero-campaign.png"
-    alt="Maison Khoudia — Collection"
-    class="hero-bg absolute inset-0 w-full h-full object-cover object-center"
-    style="animation: kenBurns 16s ease-in-out infinite alternate;"
-    loading="eager"
-    decoding="async"
-  />
-
-  <!-- Deep vignette overlays -->
-  <div class="absolute inset-0" style="background: linear-gradient(105deg, rgba(26,10,4,0.88) 0%, rgba(26,10,4,0.65) 35%, rgba(26,10,4,0.25) 58%, rgba(26,10,4,0.05) 75%);"></div>
-  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(26,10,4,0.6) 0%, transparent 40%);"></div>
-  <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(26,10,4,0.3) 0%, transparent 20%);"></div>
-
-  <!-- Curtain (reveals on load) -->
-  <div class="hero-curtain absolute inset-0 bg-brown z-20 pointer-events-none"></div>
-
-  <!-- Gold decorative side line -->
-  <div class="hero-sideline absolute left-6 sm:left-10 lg:left-16 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center gap-3 opacity-0">
-    <span class="font-sans text-[8px] tracking-[0.35em] uppercase text-gold/50" style="writing-mode:vertical-rl;">Maison Khoudia</span>
-    <div class="w-px h-20 bg-gradient-to-b from-transparent via-gold/40 to-transparent"></div>
+  <!-- Background avec parallax + Ken Burns -->
+  <div class="hero-bg-wrap absolute inset-[-8%] will-change-transform">
+    <img
+      src="/hero-campaign.png"
+      alt="Maison Khoudia"
+      class="w-full h-full object-cover object-center"
+      style="animation: kenBurns 20s ease-in-out infinite alternate; transform-origin: center;"
+      loading="eager"
+      decoding="async"
+    />
   </div>
 
-  <!-- Main content -->
+  <!-- Grain texture luxe -->
+  <div class="absolute inset-0 z-[1] pointer-events-none opacity-[0.04]"
+    style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%221%22/></svg>');
+    mix-blend-mode: overlay;">
+  </div>
+
+  <!-- Dégradés -->
+  <div class="absolute inset-0 z-[2]"
+    style="background: linear-gradient(110deg, rgba(20,8,2,0.90) 0%, rgba(20,8,2,0.70) 32%, rgba(20,8,2,0.22) 58%, rgba(20,8,2,0.04) 75%);">
+  </div>
+  <div class="absolute inset-0 z-[2]"
+    style="background: linear-gradient(to top, rgba(20,8,2,0.70) 0%, rgba(20,8,2,0.15) 30%, transparent 55%);">
+  </div>
+
+  <!-- Rideaux d'ouverture -->
+  <div class="curtain curtain-top absolute top-0 left-0 right-0 z-40 bg-brown will-change-transform" style="height:52%;"></div>
+  <div class="curtain curtain-bot absolute bottom-0 left-0 right-0 z-40 bg-brown will-change-transform" style="height:52%;"></div>
+
+  <!-- Particules dorées flottantes -->
+  <div class="absolute inset-0 z-[3] pointer-events-none overflow-hidden">
+    {[
+      { x:12, y:25, s:3, d:0    },
+      { x:85, y:15, s:2, d:1.2  },
+      { x:70, y:60, s:4, d:0.5  },
+      { x:20, y:72, s:2, d:1.8  },
+      { x:55, y:85, s:3, d:0.9  },
+      { x:92, y:45, s:2, d:2.1  },
+    ].map(p => (
+      <div
+        class="particle absolute rounded-full bg-gold opacity-0"
+        style={`width:${p.s}px;height:${p.s}px;left:${p.x}%;top:${p.y}%;animation:particleFloat ${4 + p.d}s ease-in-out ${3 + p.d}s infinite;`}
+      ></div>
+    ))}
+  </div>
+
+  <!-- Ligne décorative gauche -->
+  <div class="absolute left-6 sm:left-8 lg:left-14 top-0 bottom-0 z-10 flex flex-col items-center justify-center gap-4 hero-sideline opacity-0">
+    <div class="w-px h-16 bg-gradient-to-b from-transparent to-gold/40"></div>
+    <span class="font-sans text-[7px] tracking-[0.4em] uppercase text-gold/40" style="writing-mode:vertical-rl;letter-spacing:0.4em;">Maison Khoudia</span>
+    <div class="w-px h-16 bg-gradient-to-t from-transparent to-gold/40"></div>
+  </div>
+
+  <!-- Contenu principal -->
   <div class="relative z-10 h-full flex items-center">
-    <div class="max-w-8xl mx-auto px-6 sm:px-10 lg:px-20 w-full">
-      <div class="max-w-[640px]">
+    <div class="max-w-8xl mx-auto px-10 sm:px-14 lg:px-24 w-full">
+      <div class="max-w-[680px]">
 
         <!-- Label -->
-        <div class="hero-el opacity-0 flex items-center gap-3 mb-8">
-          <div class="w-8 h-px bg-gold/60"></div>
-          <span class="font-sans text-[10px] tracking-[0.35em] uppercase text-gold/70">Collection Automne 2025</span>
+        <div class="overflow-hidden mb-7">
+          <div class="hero-line flex items-center gap-3 translate-y-full">
+            <div class="hero-bar w-0 h-px bg-gold/50 transition-all duration-700"></div>
+            <span class="font-sans text-[10px] tracking-[0.4em] uppercase text-gold/60">Collection Automne 2025</span>
+          </div>
         </div>
 
-        <!-- Headline -->
-        <h1 class="mb-8 leading-[0.92]">
-          <span class="hero-el opacity-0 block font-serif text-[2.6rem] sm:text-[3.4rem] lg:text-[4.4rem] xl:text-[5rem] font-light text-cream-light/90 tracking-tight">
-            Porter l'Afrique
-          </span>
-          <span class="hero-el opacity-0 block font-serif text-[3.4rem] sm:text-[4.4rem] lg:text-[5.6rem] xl:text-[6.4rem] font-bold text-cream-light tracking-tight mt-1">
-            avec fierté
-          </span>
-          <span class="hero-el opacity-0 block font-serif text-[2rem] sm:text-[2.6rem] lg:text-[3.2rem] xl:text-[3.6rem] font-light italic text-gold mt-3">
-            et élégance
-          </span>
+        <!-- Titre — chaque ligne dans overflow-hidden pour l'effet "montée" -->
+        <h1 class="mb-8" style="line-height:0.95;">
+
+          <div class="overflow-hidden">
+            <div class="hero-line translate-y-full">
+              <span class="block font-serif font-light text-[clamp(2.6rem,5vw,4.5rem)] text-cream-light/85 tracking-tight">
+                Porter
+              </span>
+            </div>
+          </div>
+
+          <div class="overflow-hidden">
+            <div class="hero-line translate-y-full">
+              <span class="block font-serif font-bold text-[clamp(3.6rem,7vw,6.5rem)] text-cream-light tracking-tight">
+                l'Afrique
+              </span>
+            </div>
+          </div>
+
+          <div class="overflow-hidden">
+            <div class="hero-line translate-y-full flex items-baseline gap-4 flex-wrap">
+              <span class="block font-serif font-light text-[clamp(2rem,3.8vw,3.4rem)] text-cream-light/80 tracking-tight italic">avec fierté</span>
+              <span class="block font-serif font-semibold text-[clamp(2rem,3.8vw,3.4rem)] text-gold tracking-tight italic">& élégance</span>
+            </div>
+          </div>
+
         </h1>
 
-        <!-- Divider -->
-        <div class="hero-el opacity-0 flex items-center gap-4 mb-7">
-          <div class="hero-line-bar h-px bg-gold" style="width:0"></div>
-          <span class="text-gold/60 text-sm">◈</span>
-          <div class="h-px bg-gold/30 w-16"></div>
+        <!-- Divider animé -->
+        <div class="overflow-hidden mb-7">
+          <div class="hero-line translate-y-full flex items-center gap-4">
+            <div class="hero-divider-line h-px bg-gold w-0 transition-all duration-700 ease-out"></div>
+            <span class="text-gold/50 text-xs">◈</span>
+          </div>
         </div>
 
         <!-- Description -->
-        <p class="hero-el opacity-0 font-sans text-[0.92rem] text-cream-light/60 leading-[1.8] mb-10 max-w-[36ch]">
-          Maison Khoudia habille chaque moment de vie avec des créations qui célèbrent la richesse de notre culture.
-        </p>
+        <div class="overflow-hidden mb-10">
+          <div class="hero-line translate-y-full">
+            <p class="font-sans text-[0.9rem] text-cream-light/55 leading-[1.85] max-w-[38ch]">
+              Chaque création Maison Khoudia célèbre la richesse de notre culture, avec le raffinement que vous méritez.
+            </p>
+          </div>
+        </div>
 
-        <!-- CTAs -->
-        <div class="hero-el opacity-0 flex flex-wrap items-center gap-5">
-          <a href={ctaHref} class="group inline-flex items-center gap-3 px-9 py-4 bg-gold text-brown font-sans font-semibold text-sm tracking-widest uppercase hover:bg-gold-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-luxury-md">
-            Découvrir la Collection
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#collections" class="inline-flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase text-cream-light/50 hover:text-gold transition-colors duration-300">
-            Nos Collections
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-          </a>
+        <!-- Boutons -->
+        <div class="overflow-hidden">
+          <div class="hero-line translate-y-full flex flex-wrap items-center gap-5">
+            <a href={ctaHref}
+              class="group relative inline-flex items-center gap-3 px-9 py-4 bg-gold text-brown font-sans font-semibold text-[11px] tracking-[0.25em] uppercase overflow-hidden hover:-translate-y-0.5 hover:shadow-luxury-md transition-all duration-300">
+              <span class="relative z-10">Découvrir la Collection</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="relative z-10 transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <div class="absolute inset-0 bg-gold-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+            </a>
+            <a href="#collections"
+              class="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-cream-light/45 hover:text-gold transition-colors duration-300 group">
+              Nos Collections
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"/></svg>
+            </a>
+          </div>
         </div>
 
       </div>
     </div>
   </div>
 
-  <!-- Bottom stats bar -->
-  <div class="hero-stats absolute bottom-0 left-0 right-0 z-10 opacity-0">
-    <div class="max-w-8xl mx-auto px-6 sm:px-10 lg:px-20">
-      <div class="border-t border-cream-light/10 py-6 flex items-center gap-10 sm:gap-16 overflow-x-auto scrollbar-none">
+  <!-- Barre stats bas -->
+  <div class="hero-stats absolute bottom-0 left-0 right-0 z-10 opacity-0 translate-y-4" style="transition:opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1);">
+    <div class="max-w-8xl mx-auto px-10 sm:px-14 lg:px-24">
+      <div class="border-t border-cream-light/[0.08] py-5 flex items-center gap-8 sm:gap-16 overflow-x-auto scrollbar-none">
         {[
-          { n: "500+", l: "Clients satisfaits" },
-          { n: "4",    l: "Collections" },
-          { n: "2000", l: "FCFA livraison" },
-          { n: "100%", l: "Fait en Afrique" },
+          { n:"500+",  l:"Clients" },
+          { n:"2000",  l:"FCFA livraison" },
+          { n:"100%",  l:"Fait en Afrique" },
+          { n:"Sur mesure", l:"Disponible" },
         ].map(s => (
-          <div class="flex-shrink-0 text-center">
-            <div class="font-serif text-xl font-bold text-gold leading-none">{s.n}</div>
-            <div class="font-sans text-[9px] tracking-[0.2em] uppercase text-cream-light/40 mt-1">{s.l}</div>
+          <div class="flex-shrink-0 flex items-center gap-3">
+            <div class="w-px h-6 bg-gold/25"></div>
+            <div>
+              <div class="font-serif text-base font-semibold text-gold leading-none">{s.n}</div>
+              <div class="font-sans text-[8px] tracking-[0.22em] uppercase text-cream-light/35 mt-0.5">{s.l}</div>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </div>
 
-  <!-- Scroll cue -->
-  <div class="hero-scroll absolute right-8 bottom-24 z-10 opacity-0 flex flex-col items-center gap-2 hidden sm:flex">
-    <div class="w-px h-12 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-gold/60 to-transparent" style="animation:floatUp 2s ease-in-out infinite;"></div>
-    </div>
+  <!-- Indicateur de scroll -->
+  <div class="hero-scroll-cue absolute right-8 bottom-20 z-10 opacity-0 hidden sm:flex flex-col items-center gap-2">
+    <div class="scroll-dot w-1 h-1 rounded-full bg-gold/60"></div>
+    <div class="w-px h-10 bg-gradient-to-b from-gold/50 to-transparent"></div>
   </div>
 
 </section>
 
 <style>
-  @keyframes kenBurns { from{transform:scale(1)} to{transform:scale(1.08)} }
-  @keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes kenBurns     { from{transform:scale(1.08)} to{transform:scale(1)} }
+  @keyframes particleFloat{
+    0%,100% { opacity:0; transform:translateY(0) scale(1); }
+    20%     { opacity:0.6; }
+    50%     { opacity:0.3; transform:translateY(-30px) scale(1.5); }
+    80%     { opacity:0.6; }
+  }
+  @keyframes scrollDot {
+    0%,100% { transform:translateY(0); opacity:0.6; }
+    50%     { transform:translateY(8px); opacity:0.2; }
+  }
   .scrollbar-none::-webkit-scrollbar { display:none; }
   .scrollbar-none { -ms-overflow-style:none; scrollbar-width:none; }
+  .scroll-dot { animation: scrollDot 2s ease-in-out infinite; }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const curtain  = document.querySelector('.hero-curtain') as HTMLElement;
-    const els      = document.querySelectorAll('.hero-el');
-    const sideline = document.querySelector('.hero-sideline') as HTMLElement;
-    const stats    = document.querySelector('.hero-stats') as HTMLElement;
-    const scroll   = document.querySelector('.hero-scroll') as HTMLElement;
-    const lineBar  = document.querySelector('.hero-line-bar') as HTMLElement;
-
-    // 1. Curtain slides up
-    if (curtain) {
-      setTimeout(() => {
-        curtain.style.transition = 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)';
-        curtain.style.transform = 'translateY(-100%)';
-      }, 100);
-    }
-
-    // 2. Text elements stagger in
     const spring = 'cubic-bezier(0.16, 1, 0.3, 1)';
-    els.forEach((el, i) => {
+
+    // ── 1. Rideaux s'ouvrent ──────────────────────────────
+    const curtainTop = document.querySelector('.curtain-top') as HTMLElement;
+    const curtainBot = document.querySelector('.curtain-bot') as HTMLElement;
+    [curtainTop, curtainBot].forEach(c => {
+      if (!c) return;
+      c.style.transition = `transform 1.2s ${spring}`;
+    });
+    setTimeout(() => {
+      if (curtainTop) curtainTop.style.transform = 'translateY(-100%)';
+      if (curtainBot) curtainBot.style.transform = 'translateY(100%)';
+    }, 120);
+
+    // ── 2. Lignes de texte montent (overflow-hidden reveal) ─
+    const lines = document.querySelectorAll('.hero-line');
+    lines.forEach((el, i) => {
       const e = el as HTMLElement;
-      e.style.transform = 'translateY(24px)';
-      const delay = 1.0 + i * 0.14;
-      e.style.transition = `opacity 0.9s ${spring} ${delay}s, transform 0.9s ${spring} ${delay}s`;
-      setTimeout(() => { e.style.opacity = '1'; e.style.transform = 'translateY(0)'; }, delay * 1000);
+      const delay = 1.1 + i * 0.16;
+      e.style.transition = `transform 1s ${spring} ${delay}s`;
+      setTimeout(() => { e.style.transform = 'translateY(0)'; }, delay * 1000);
     });
 
-    // 3. Gold line grows
-    if (lineBar) {
-      setTimeout(() => {
-        lineBar.style.transition = 'width 0.7s cubic-bezier(0.16,1,0.3,1)';
-        lineBar.style.width = '48px';
-      }, 1700);
-    }
+    // ── 3. Barre dorée grandit ───────────────────────────
+    const bar  = document.querySelector('.hero-bar') as HTMLElement;
+    const divLine = document.querySelector('.hero-divider-line') as HTMLElement;
+    setTimeout(() => { if (bar)     { bar.style.width  = '32px'; } }, 1250);
+    setTimeout(() => { if (divLine) { divLine.style.width = '44px'; } }, 1900);
 
-    // 4. Side decoration
-    if (sideline) {
-      setTimeout(() => {
-        sideline.style.transition = 'opacity 1.2s ease';
-        sideline.style.opacity = '1';
-      }, 2200);
-    }
+    // ── 4. Éléments secondaires ──────────────────────────
+    const sideline = document.querySelector('.hero-sideline') as HTMLElement;
+    const stats    = document.querySelector('.hero-stats')    as HTMLElement;
+    const scrollCue= document.querySelector('.hero-scroll-cue') as HTMLElement;
 
-    // 5. Stats bar
-    if (stats) {
-      setTimeout(() => {
-        stats.style.transition = 'opacity 1s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1)';
-        stats.style.transform = 'translateY(0)';
-        stats.style.opacity = '1';
-      }, 2000);
-      stats.style.transform = 'translateY(20px)';
-    }
+    setTimeout(() => {
+      if (sideline) { sideline.style.transition = 'opacity 1.2s ease'; sideline.style.opacity = '1'; }
+    }, 2300);
+    setTimeout(() => {
+      if (stats) { stats.style.opacity = '1'; stats.style.transform = 'translateY(0)'; }
+    }, 2100);
+    setTimeout(() => {
+      if (scrollCue) { scrollCue.style.transition = 'opacity 1s ease'; scrollCue.style.opacity = '1'; }
+    }, 2800);
 
-    // 6. Scroll cue
-    if (scroll) {
-      setTimeout(() => {
-        scroll.style.transition = 'opacity 1s ease';
-        scroll.style.opacity = '1';
-      }, 2600);
-    }
+    // ── 5. Parallax sur scroll ───────────────────────────
+    const bgWrap = document.querySelector('.hero-bg-wrap') as HTMLElement;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (bgWrap) bgWrap.style.transform = `translateY(${y * 0.3}px)`;
+    }, { passive: true });
+
+    // ── 6. Parallax souris (subtil) ──────────────────────
+    document.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!bgWrap) return;
+      const mx = (e.clientX / window.innerWidth  - 0.5) * 18;
+      const my = (e.clientY / window.innerHeight - 0.5) * 10;
+      bgWrap.style.transform = `translate(${mx}px, ${my}px)`;
+    });
   });
 </script>
