@@ -5,24 +5,32 @@ import Footer from '../components/Footer.astro';
 ---
 <Layout title="Notre Histoire — Maison Khoudia">
 
-  <!-- Hero -->
-  <div class="relative overflow-hidden" style="min-height:70vh;">
-    <img src="/fondatrice.png" alt="Fondatrice Maison Khoudia" class="absolute inset-0 w-full h-full object-cover object-top" />
-    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(44,24,16,0.92) 0%,rgba(44,24,16,0.65) 50%,rgba(44,24,16,0.2) 100%);"></div>
-    <div class="relative z-10 flex items-center min-h-[70vh] px-4 sm:px-6 lg:px-8">
+  <!-- Hero À Propos -->
+  <div class="relative overflow-hidden" style="min-height:68vh;">
+    <img src="/fondatrice.png" alt="Fondatrice Maison Khoudia" class="absolute inset-0 w-full h-full object-cover object-top" loading="eager" />
+    <!-- Dégradé gauche intense + bas doux -->
+    <div class="absolute inset-0" style="background:linear-gradient(110deg,rgba(20,8,2,0.95) 0%,rgba(20,8,2,0.75) 40%,rgba(20,8,2,0.15) 70%);"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(20,8,2,0.60) 0%,transparent 40%);"></div>
+    <!-- Grain luxe -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22/></svg>');mix-blend-mode:overlay;"></div>
+    <div class="relative z-10 flex items-center min-h-[68vh] px-4 sm:px-14 lg:px-24">
       <div class="max-w-8xl mx-auto w-full">
         <nav class="breadcrumb mb-8">
           <a href="/" class="text-cream-light/50 hover:text-gold transition-colors">Accueil</a>
           <span class="text-gold/40">›</span>
           <span class="text-gold">Notre Histoire</span>
         </nav>
-        <div class="max-w-lg">
-          <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-4">Fondée avec passion</p>
-          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.95] mb-6">
+        <div class="max-w-xl">
+          <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-5">Fondée avec passion</p>
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.92] mb-6">
             Notre<br/><em class="text-gold not-italic">Histoire</em>
           </h1>
-          <div class="w-10 h-px bg-gold mb-6"></div>
-          <p class="font-sans text-cream-light/60 text-base leading-relaxed max-w-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-10 h-px bg-gold"></div>
+            <span class="text-gold/50 text-sm">◈</span>
+            <div class="w-6 h-px bg-gold/40"></div>
+          </div>
+          <p class="font-sans text-cream-light/65 text-base leading-relaxed max-w-sm">
             Une passion pour la mode africaine, un engagement envers l'excellence et l'authenticité.
           </p>
         </div>

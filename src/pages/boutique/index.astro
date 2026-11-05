@@ -5,11 +5,29 @@ import Footer from '../../components/Footer.astro';
 import { products, categories, formatPrice } from '../../data/products.js';
 ---
 <Layout title="Boutique — Maison Khoudia">
-  <div class="bg-brown py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-8xl mx-auto">
-      <nav class="breadcrumb mb-6"><a href="/" class="text-cream-light/50 hover:text-gold">Accueil</a><span class="text-gold/40">›</span><span class="text-gold">Boutique</span></nav>
-      <h1 class="font-serif text-4xl sm:text-5xl font-bold text-cream-light mb-4">Toute la Boutique</h1>
-      <p class="font-sans text-cream-light/60 text-base max-w-lg">Explorez toutes nos collections — mode femme, homme, enfants et accessoires de luxe.</p>
+  <!-- Hero Boutique -->
+  <div class="relative overflow-hidden" style="min-height:55vh;">
+    <img src="/products/p1.jpg" alt="Boutique Maison Khoudia" class="absolute inset-0 w-full h-full object-cover object-top" loading="eager" />
+    <div class="absolute inset-0" style="background:linear-gradient(110deg,rgba(20,8,2,0.92) 0%,rgba(20,8,2,0.70) 45%,rgba(20,8,2,0.25) 75%);"></div>
+    <div class="relative z-10 flex items-center min-h-[55vh] px-4 sm:px-14 lg:px-24">
+      <div class="max-w-8xl mx-auto w-full">
+        <nav class="breadcrumb mb-6">
+          <a href="/" class="text-cream-light/50 hover:text-gold">Accueil</a><span class="text-gold/40">›</span><span class="text-gold">Boutique</span>
+        </nav>
+        <div class="max-w-xl">
+          <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-4">Nos Collections</p>
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.95] mb-5">
+            Toute la<br/><em class="text-gold not-italic">Boutique</em>
+          </h1>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-10 h-px bg-gold"></div>
+            <span class="text-gold/50 text-sm">◈</span>
+          </div>
+          <p class="font-sans text-cream-light/60 text-base leading-relaxed max-w-sm">
+            Explorez toutes nos collections — mode femme, homme, enfants et accessoires de luxe.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
   <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
