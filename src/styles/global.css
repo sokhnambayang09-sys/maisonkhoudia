@@ -47,7 +47,7 @@
 
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-brown font-sans font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-gold-dark hover:shadow-luxury-md hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-brown font-sans font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-gold-dark hover:shadow-luxury-md hover:-translate-y-0.5 active:translate-y-0 rounded-full;
     position: relative;
     overflow: hidden;
   }
@@ -62,10 +62,10 @@
   .btn-primary:hover::after { transform: translateX(100%); }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-luxury-black text-luxury-black font-sans font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-luxury-black hover:text-cream-light;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-luxury-black text-luxury-black font-sans font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-luxury-black hover:text-cream-light rounded-full;
   }
   .btn-dark {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-luxury-black text-cream-light font-sans font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-brown;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-luxury-black text-cream-light font-sans font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-brown rounded-full;
   }
   .btn-ghost {
     @apply inline-flex items-center gap-2 px-4 py-2 font-sans text-sm font-medium text-luxury-black hover:text-gold transition-colors duration-200;

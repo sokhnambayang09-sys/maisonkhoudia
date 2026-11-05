@@ -3,7 +3,7 @@ interface Props { ctaHref?: string; }
 const { ctaHref = "/boutique" } = Astro.props;
 ---
 
-<section class="hero relative h-screen min-h-[620px] overflow-hidden bg-brown" aria-label="Hero — Maison Khoudia">
+<section class="hero relative h-[82vh] min-h-[540px] max-h-[820px] overflow-hidden bg-brown" aria-label="Hero — Maison Khoudia">
 
   <!-- Background avec parallax + Ken Burns -->
   <div class="hero-bg-wrap absolute inset-[-8%] will-change-transform">
@@ -121,7 +121,7 @@ const { ctaHref = "/boutique" } = Astro.props;
         <div class="overflow-hidden">
           <div class="hero-line translate-y-full flex flex-wrap items-center gap-5">
             <a href={ctaHref}
-              class="group relative inline-flex items-center gap-3 px-9 py-4 bg-gold text-brown font-sans font-semibold text-[11px] tracking-[0.25em] uppercase overflow-hidden hover:-translate-y-0.5 hover:shadow-luxury-md transition-all duration-300">
+              class="group relative inline-flex items-center gap-3 px-9 py-4 bg-gold text-brown font-sans font-semibold text-[11px] tracking-[0.25em] uppercase rounded-full overflow-hidden hover:-translate-y-0.5 hover:shadow-luxury-md transition-all duration-300">
               <span class="relative z-10">Découvrir la Collection</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="relative z-10 transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               <div class="absolute inset-0 bg-gold-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
