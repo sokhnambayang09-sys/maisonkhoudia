@@ -7,7 +7,7 @@ interface Props {
   class?: string; tall?: boolean;
 }
 const { id, name, price, category, subcategory, gradient = 'img-placeholder-beige', image, new: isNew = false, bestseller = false, class: className = '', tall = false } = Astro.props;
-const whatsappPhone = '221774844267';
+const whatsappPhone = '221785064773';
 const whatsappMsg = encodeURIComponent(`Bonjour Maison Khoudia 👋\n\nJe suis intéressé(e) par :\n🛍️ *${name}*\nPrix : ${formatPrice(price)}\n\nMerci !`);
 const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${whatsappMsg}`;
 const gradientStyles: Record<string,string> = {
