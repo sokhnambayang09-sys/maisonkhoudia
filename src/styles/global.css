@@ -150,5 +150,5 @@
   .img-placeholder-navy   { background: linear-gradient(135deg,#D5DCE8 0%,#A8B5C9 50%,#4A5C8B 100%); }
 
   .writing-vertical { writing-mode: vertical-rl; text-orientation: mixed; }
-  .product-grid { @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6; }
+  .product-grid { @apply grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6; }
 }

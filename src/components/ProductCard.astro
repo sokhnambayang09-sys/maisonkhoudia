@@ -29,75 +29,63 @@ const gradientStyles: Record<string,string> = {
 };
 ---
 
-<article class={`mk-card group ${className}`} data-product-id={id} data-wa={whatsappUrl}>
+<article class={`mk-card group ${className}`} data-product-id={id}>
 
   <!-- Image -->
   <div
-    class="img-zone relative overflow-hidden rounded-2xl cursor-pointer"
+    class="img-zone relative overflow-hidden rounded-xl sm:rounded-2xl"
     style={tall ? 'aspect-ratio:2/3' : 'aspect-ratio:3/4'}
-    onclick={`window.location.href='/produit/${id}'`}
   >
+    <!-- Full-area link to product page (z-10, below badges and CTA) -->
+    <a href={`/produit/${id}`} class="absolute inset-0 z-10" aria-label={`Voir ${name}`}></a>
+
     {image ? (
       <img src={image} alt={name} class="img-media w-full h-full object-cover object-top transition-transform duration-700 ease-out" loading="lazy" />
     ) : (
       <div class="img-media w-full h-full transition-transform duration-700 ease-out" style={`background:${gradientStyles[gradient] ?? gradientStyles['img-placeholder-beige']};`}></div>
     )}
 
-    <div class="card-overlay absolute inset-0 bg-black/0 transition-all duration-400 pointer-events-none rounded-2xl"></div>
+    <div class="card-overlay absolute inset-0 bg-black/0 transition-all duration-400 pointer-events-none rounded-xl sm:rounded-2xl"></div>
 
     <!-- Badges -->
     {(isNew || bestseller) && (
-      <div class="absolute top-3 left-3 z-10 flex flex-col gap-1 pointer-events-none">
-        {isNew      && <span class="px-2.5 py-1 bg-white/90 text-luxury-black text-[9px] font-sans font-bold tracking-[0.12em] uppercase rounded-full shadow-sm">Nouveau</span>}
-        {bestseller && <span class="px-2.5 py-1 bg-gold text-brown text-[9px] font-sans font-bold tracking-[0.12em] uppercase rounded-full shadow-sm">Best seller</span>}
+      <div class="absolute top-2 left-2 sm:top-3 sm:left-3 z-20 flex flex-col gap-1 pointer-events-none">
+        {isNew      && <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white/90 text-luxury-black text-[8px] sm:text-[9px] font-sans font-bold tracking-[0.12em] uppercase rounded-full shadow-sm">Nouveau</span>}
+        {bestseller && <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-gold text-brown text-[8px] sm:text-[9px] font-sans font-bold tracking-[0.12em] uppercase rounded-full shadow-sm">Best seller</span>}
       </div>
     )}
 
-    <!-- Bouton Commander au hover -->
-    <div class="card-cta absolute inset-x-3 bottom-3 z-20 opacity-0 translate-y-2 transition-all duration-300 pointer-events-none">
-      <button class="wa-btn flex items-center justify-center gap-2 w-full py-3 bg-white/95 backdrop-blur-sm text-luxury-black text-[10px] font-sans font-semibold tracking-[0.12em] uppercase hover:bg-gold hover:text-brown transition-colors duration-200 rounded-xl shadow-luxury-md">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.523 5.838L0 24l6.337-1.498A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 0 1-5.013-1.374l-.36-.213-3.73.881.937-3.613-.234-.37A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+    <!-- Commander button: always visible on mobile, hover-only on desktop -->
+    <div class="card-cta absolute inset-x-2 sm:inset-x-3 bottom-2 sm:bottom-3 z-30 transition-all duration-300">
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="wa-btn flex items-center justify-center gap-1.5 sm:gap-2 w-full py-2 sm:py-3 bg-white/95 backdrop-blur-sm text-luxury-black text-[9px] sm:text-[10px] font-sans font-semibold tracking-[0.12em] uppercase hover:bg-gold hover:text-brown transition-colors duration-200 rounded-lg sm:rounded-xl shadow-luxury-md"
+      >
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.523 5.838L0 24l6.337-1.498A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 0 1-5.013-1.374l-.36-.213-3.73.881.937-3.613-.234-.37A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
         Commander
-      </button>
+      </a>
     </div>
   </div>
 
   <!-- Infos -->
-  <div class="pt-3.5 pb-1 px-0.5">
-    {subcategory && <p class="font-sans text-[9px] tracking-[0.22em] uppercase text-gold font-semibold mb-1 capitalize">{subcategory}</p>}
+  <div class="pt-2.5 sm:pt-3.5 pb-1 px-0.5">
+    {subcategory && <p class="font-sans text-[8px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.22em] uppercase text-gold font-semibold mb-0.5 sm:mb-1 capitalize">{subcategory}</p>}
     <a href={`/produit/${id}`} class="block">
-      <h3 class="font-serif text-[0.95rem] font-medium text-luxury-black leading-snug line-clamp-1 hover:text-gold transition-colors duration-200">{name}</h3>
+      <h3 class="font-serif text-[0.78rem] sm:text-[0.95rem] font-medium text-luxury-black leading-snug line-clamp-2 sm:line-clamp-1 hover:text-gold transition-colors duration-200">{name}</h3>
     </a>
-    <p class="font-sans text-[0.82rem] font-semibold text-luxury-black/60 mt-1">{formatPrice(price)}</p>
+    <p class="font-sans text-[0.72rem] sm:text-[0.82rem] font-semibold text-luxury-black/60 mt-0.5 sm:mt-1">{formatPrice(price)}</p>
   </div>
 
 </article>
 
-<script>
-  document.querySelectorAll('.mk-card').forEach(card => {
-    const imgZone = card.querySelector('.img-zone');
-    const media   = card.querySelector('.img-media');
-    const overlay = card.querySelector('.card-overlay');
-    const cta     = card.querySelector('.card-cta');
-    const waBtn   = card.querySelector('.wa-btn');
-    const waUrl   = (card as HTMLElement).dataset.wa ?? '';
-
-    waBtn?.addEventListener('click', e => {
-      e.stopPropagation();
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
-    });
-
-    imgZone?.addEventListener('mouseenter', () => {
-      media?.classList.add('scale-[1.05]');
-      overlay?.classList.replace('bg-black/0','bg-black/20');
-      cta?.classList.remove('opacity-0','translate-y-2','pointer-events-none');
-      cta?.classList.add('opacity-100','translate-y-0','pointer-events-auto');
-    });
-    imgZone?.addEventListener('mouseleave', () => {
-      media?.classList.remove('scale-[1.05]');
-      overlay?.classList.replace('bg-black/20','bg-black/0');
-      cta?.classList.add('opacity-0','translate-y-2','pointer-events-none');
-      cta?.classList.remove('opacity-100','translate-y-0','pointer-events-auto');
-    });
-  });
-</script>
+<style>
+  /* Desktop hover effects (not on mobile to avoid double-tap) */
+  @media (min-width: 640px) {
+    .card-cta { opacity: 0; transform: translateY(8px); pointer-events: none; }
+    .mk-card:hover .card-cta { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .mk-card:hover .img-media { transform: scale(1.05); }
+    .mk-card:hover .card-overlay { background: rgba(0,0,0,0.20); }
+  }
+</style>

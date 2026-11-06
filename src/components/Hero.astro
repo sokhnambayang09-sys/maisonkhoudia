@@ -249,13 +249,5 @@ const previewProducts = products.filter(p => p.new || p.bestseller).slice(0, 8);
       const y = window.scrollY;
       if (bgWrap) bgWrap.style.transform = `translateY(${y * 0.3}px)`;
     }, { passive: true });
-
-    // ── 6. Parallax souris (subtil) ──────────────────────
-    document.addEventListener('mousemove', (e: MouseEvent) => {
-      if (!bgWrap) return;
-      const mx = (e.clientX / window.innerWidth  - 0.5) * 18;
-      const my = (e.clientY / window.innerHeight - 0.5) * 10;
-      bgWrap.style.transform = `translate(${mx}px, ${my}px)`;
-    });
   });
 </script>
