@@ -1,9 +1,12 @@
 ---
+import { products } from '../data/products.js';
 interface Props { ctaHref?: string; }
 const { ctaHref = "/boutique" } = Astro.props;
+
+const previewProducts = products.filter(p => p.new || p.bestseller).slice(0, 8);
 ---
 
-<section class="hero relative h-[72vh] sm:h-[82vh] min-h-[500px] max-h-[820px] overflow-hidden bg-brown" aria-label="Hero — Maison Khoudia">
+<section class="hero relative h-screen sm:h-[82vh] min-h-[600px] sm:min-h-[500px] sm:max-h-[820px] overflow-hidden bg-brown" aria-label="Hero — Maison Khoudia">
 
   <!-- Background avec parallax + Ken Burns -->
   <div class="hero-bg-wrap absolute inset-[-8%] will-change-transform">
@@ -60,7 +63,7 @@ const { ctaHref = "/boutique" } = Astro.props;
   </div>
 
   <!-- Contenu principal -->
-  <div class="relative z-10 h-full flex items-center">
+  <div class="relative z-10 h-full flex items-center pt-20 sm:pt-0">
     <div class="max-w-8xl mx-auto px-5 sm:px-14 lg:px-24 w-full">
       <div class="max-w-[680px]">
 
@@ -152,6 +155,22 @@ const { ctaHref = "/boutique" } = Astro.props;
           </div>
         ))}
       </div>
+    </div>
+  </div>
+
+  <!-- Mobile product preview strip -->
+  <div class="sm:hidden absolute bottom-0 left-0 right-0 z-10 pb-5" style="background:linear-gradient(to top,rgba(20,8,2,0.90) 0%,rgba(20,8,2,0.60) 55%,transparent 100%);">
+    <p class="font-sans text-[8px] tracking-[0.35em] uppercase text-gold/60 px-5 mb-3">Nouveautés à saisir</p>
+    <div class="flex gap-3 px-5 overflow-x-auto scrollbar-none">
+      {previewProducts.map(p => (
+        <a href={`/produit/${p.id}`} class="flex-shrink-0 group">
+          <div class="w-[64px] h-[80px] rounded-xl overflow-hidden border border-gold/20 group-active:border-gold/60 transition-all duration-200">
+            <img src={p.image} alt={p.name} class="w-full h-full object-cover object-top" loading="lazy" />
+          </div>
+          <p class="mt-1.5 font-sans text-[8px] text-cream-light/70 leading-tight w-[64px] truncate">{p.name.split(' ').slice(0,2).join(' ')}</p>
+          <p class="font-sans text-[9px] text-gold font-semibold">{p.price.toLocaleString()} F</p>
+        </a>
+      ))}
     </div>
   </div>
 

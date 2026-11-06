@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <!-- Announcement bar -->
-<div class="announcement-bar bg-brown text-cream-light/80 text-center py-2 px-0 overflow-hidden">
+<div class="announcement-bar hidden lg:block bg-brown text-cream-light/80 text-center py-2 px-0 overflow-hidden">
   <div class="ticker-inner flex items-center gap-16 font-sans text-[10px] tracking-[0.22em] uppercase" style="width:max-content;animation:shimmerScroll 22s linear infinite;">
     {Array(5).fill(null).map(() => (
       <>
@@ -26,7 +26,7 @@ const currentPath = Astro.url.pathname;
   </div>
 </div>
 
-<header id="main-header" class="sticky top-0 z-30 transition-all duration-400" role="banner">
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400" role="banner">
   <div class="header-bg absolute inset-0 bg-cream-light/0 backdrop-blur-0 border-b border-transparent transition-all duration-400"></div>
   <div class="relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 md:h-24">
@@ -176,8 +176,10 @@ const currentPath = Astro.url.pathname;
   const headerEl = document.getElementById('main-header');
   const headerBg = headerEl?.querySelector('.header-bg') as HTMLElement;
 
+  const heroEl = document.querySelector('.hero') as HTMLElement;
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 60;
+    const threshold = heroEl ? Math.max(heroEl.offsetHeight - 100, 60) : 60;
+    const scrolled = window.scrollY > threshold;
 
     // Barre d'annonce disparaît au scroll
     if (announcementBar) {
