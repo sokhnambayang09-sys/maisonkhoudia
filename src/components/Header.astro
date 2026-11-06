@@ -13,21 +13,25 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<!-- Announcement bar -->
-<div class="announcement-bar hidden lg:block bg-brown text-cream-light/80 text-center py-2 px-0 overflow-hidden">
-  <div class="ticker-inner flex items-center gap-16 font-sans text-[10px] tracking-[0.22em] uppercase" style="width:max-content;animation:shimmerScroll 22s linear infinite;">
-    {Array(5).fill(null).map(() => (
-      <>
-        <span class="text-cream-light/80 whitespace-nowrap">✦ Livraison disponible à partir de 2 000 FCFA</span>
-        <span class="text-gold/70 whitespace-nowrap">✦ Nouvelle collection automne 2025</span>
-        <span class="text-cream-light/80 whitespace-nowrap">✦ Commandes personnalisées disponibles</span>
-      </>
-    ))}
-  </div>
-</div>
+<header id="main-header" data-mode="hero" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400" role="banner">
 
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400" role="banner">
-  <div class="header-bg absolute inset-0 bg-cream-light/0 backdrop-blur-0 border-b border-transparent transition-all duration-400"></div>
+  <!-- Background layer -->
+  <div id="header-bg" class="absolute inset-0 border-b border-transparent transition-all duration-400"></div>
+
+  <!-- Announcement bar (desktop only, inside fixed header) -->
+  <div id="announcement-bar" class="hidden lg:block overflow-hidden bg-brown text-cream-light/80 text-center py-2 px-0" style="max-height:40px;">
+    <div class="ticker-inner flex items-center gap-16 font-sans text-[10px] tracking-[0.22em] uppercase" style="width:max-content;animation:shimmerScroll 22s linear infinite;">
+      {Array(5).fill(null).map(() => (
+        <>
+          <span class="text-cream-light/80 whitespace-nowrap">✦ Livraison disponible à partir de 2 000 FCFA</span>
+          <span class="text-gold/70 whitespace-nowrap">✦ Nouvelle collection automne 2025</span>
+          <span class="text-cream-light/80 whitespace-nowrap">✦ Commandes personnalisées disponibles</span>
+        </>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main nav -->
   <div class="relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 md:h-24">
 
@@ -44,9 +48,14 @@ const currentPath = Astro.url.pathname;
         <span class="hamburger-line"></span>
       </button>
 
-      <!-- Logo -->
+      <!-- Logo with pill wrapper -->
       <a href="/" class="flex-shrink-0" aria-label="Maison Khoudia">
-        <img id="main-logo" src="/logo.png" alt="Maison Khoudia" class="h-16 md:h-20 w-auto object-contain transition-all duration-500 hover:opacity-80" style="filter: brightness(0) invert(1);" loading="eager" />
+        <div id="logo-pill" class="transition-all duration-500 rounded-xl px-3 py-1" style="background:rgba(255,255,255,0.90);">
+          <img id="main-logo" src="/logo.png" alt="Maison Khoudia"
+               class="h-10 md:h-12 w-auto object-contain transition-all duration-500 hover:opacity-80"
+               style="mix-blend-mode:multiply;"
+               loading="eager" />
+        </div>
       </a>
 
       <!-- Desktop nav -->
@@ -79,10 +88,10 @@ const currentPath = Astro.url.pathname;
 
       <!-- Icons -->
       <div class="flex items-center gap-1">
-        <button class="w-10 h-10 flex items-center justify-center text-luxury-black hover:text-gold transition-colors duration-200" aria-label="Rechercher">
+        <button class="icon-btn w-10 h-10 flex items-center justify-center hover:text-gold transition-colors duration-200" aria-label="Rechercher">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         </button>
-        <button class="hidden sm:flex w-10 h-10 items-center justify-center text-luxury-black hover:text-gold transition-colors duration-200" aria-label="Favoris">
+        <button class="icon-btn hidden sm:flex w-10 h-10 items-center justify-center hover:text-gold transition-colors duration-200" aria-label="Favoris">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
         <a href="/boutique" class="hidden sm:flex items-center gap-2 ml-3 px-7 py-2.5 bg-gold text-brown font-sans text-sm font-bold tracking-wide rounded-full hover:bg-gold-dark hover:shadow-luxury-md transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap">
@@ -139,6 +148,19 @@ const currentPath = Astro.url.pathname;
   </div>
 </nav>
 
+<style>
+  /* Hero mode (transparent header over dark bg) */
+  #main-header[data-mode="hero"] .nav-link { color: rgba(255,255,255,0.85); }
+  #main-header[data-mode="hero"] .nav-link:hover { color: #D4AF37; }
+  #main-header[data-mode="hero"] .icon-btn { color: rgba(255,255,255,0.80); }
+  #main-header[data-mode="hero"] .hamburger-line { background: rgba(255,255,255,0.90); }
+
+  /* Scrolled mode (white header) */
+  #main-header[data-mode="scrolled"] .nav-link { color: #1A1A1A; }
+  #main-header[data-mode="scrolled"] .icon-btn { color: #1A1A1A; }
+  #main-header[data-mode="scrolled"] .hamburger-line { background: #1A1A1A; }
+</style>
+
 <script>
   function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
@@ -171,38 +193,47 @@ const currentPath = Astro.url.pathname;
     btn?.setAttribute('aria-expanded', String(!isOpen));
   }
 
-  // Sticky header — style comme référence au scroll
-  const announcementBar = document.querySelector('.announcement-bar') as HTMLElement;
-  const headerEl = document.getElementById('main-header');
-  const headerBg = headerEl?.querySelector('.header-bg') as HTMLElement;
+  const headerEl   = document.getElementById('main-header') as HTMLElement;
+  const headerBg   = document.getElementById('header-bg') as HTMLElement;
+  const annBar     = document.getElementById('announcement-bar') as HTMLElement;
+  const logoPill   = document.getElementById('logo-pill') as HTMLElement;
+  const heroEl     = document.querySelector('.hero') as HTMLElement;
 
-  const heroEl = document.querySelector('.hero') as HTMLElement;
-  window.addEventListener('scroll', () => {
-    const threshold = heroEl ? Math.max(heroEl.offsetHeight - 100, 60) : 60;
-    const scrolled = window.scrollY > threshold;
+  function applyMode(scrolled: boolean) {
+    headerEl.dataset.mode = scrolled ? 'scrolled' : 'hero';
 
-    // Barre d'annonce disparaît au scroll
-    if (announcementBar) {
-      announcementBar.style.transition = 'max-height 0.4s ease, opacity 0.3s ease';
-      announcementBar.style.maxHeight  = scrolled ? '0'    : '40px';
-      announcementBar.style.opacity    = scrolled ? '0'    : '1';
-      announcementBar.style.overflow   = 'hidden';
-    }
-
-    // Header devient blanc propre + ombre légère
+    // Header background
     if (headerBg) {
-      headerBg.style.background     = scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(250,250,248,0)';
-      headerBg.style.backdropFilter = scrolled ? 'blur(16px)'              : 'blur(0)';
-      headerBg.style.borderColor    = scrolled ? 'rgba(0,0,0,0.07)'        : 'transparent';
+      headerBg.style.background     = scrolled ? 'rgba(255,255,255,0.97)' : 'transparent';
+      headerBg.style.backdropFilter = scrolled ? 'blur(16px)' : 'none';
+      headerBg.style.borderColor    = scrolled ? 'rgba(0,0,0,0.07)' : 'transparent';
       headerBg.style.boxShadow      = scrolled ? '0 2px 20px rgba(0,0,0,0.07)' : 'none';
     }
 
-    // Logo : blanc sur fond sombre, couleur naturelle sur fond blanc
-    const logo = document.getElementById('main-logo') as HTMLElement;
-    if (logo) {
-      logo.style.filter = scrolled ? 'none' : 'brightness(0) invert(1)';
-      logo.style.mixBlendMode = scrolled ? 'multiply' : 'normal';
+    // Announcement bar: hide on scroll
+    if (annBar) {
+      annBar.style.maxHeight = scrolled ? '0' : '40px';
+      annBar.style.opacity   = scrolled ? '0' : '1';
+      annBar.style.transition = 'max-height 0.4s ease, opacity 0.3s ease';
+      annBar.style.overflow  = 'hidden';
     }
+
+    // Logo pill: white badge on dark bg, transparent on white bg
+    if (logoPill) {
+      logoPill.style.background    = scrolled ? 'transparent' : 'rgba(255,255,255,0.90)';
+      logoPill.style.backdropFilter= scrolled ? 'none' : 'blur(4px)';
+      logoPill.style.borderRadius  = scrolled ? '0' : '10px';
+      logoPill.style.padding       = scrolled ? '0' : '4px 12px';
+    }
+  }
+
+  // Initialize: if no dark hero, start in scrolled mode
+  const hasHero = !!heroEl;
+  applyMode(!hasHero);
+
+  const threshold = heroEl ? Math.max(heroEl.offsetHeight - 100, 60) : 60;
+  window.addEventListener('scroll', () => {
+    applyMode(window.scrollY > threshold);
   }, { passive: true });
 
   (window as any).toggleMobileMenu = toggleMobileMenu;

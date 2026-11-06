@@ -7,7 +7,7 @@ import { products, categories } from '../../data/products.js';
 <Layout title="Boutique — Maison Khoudia">
 
   <!-- Compact page header (no big hero) -->
-  <div class="pt-24 sm:pt-28 pb-5 px-4 sm:px-6 lg:px-8 bg-white border-b border-cream-dark">
+  <div class="pt-24 sm:pt-28 lg:pt-36 pb-5 px-4 sm:px-6 lg:px-8 bg-white border-b border-cream-dark">
     <div class="max-w-8xl mx-auto">
       <nav class="breadcrumb mb-2">
         <a href="/" class="text-luxury-gray hover:text-gold">Accueil</a>
@@ -22,7 +22,7 @@ import { products, categories } from '../../data/products.js';
   </div>
 
   <!-- Sticky filter bar -->
-  <div class="sticky top-20 z-20 bg-white border-b border-cream-dark shadow-sm">
+  <div class="sticky top-20 lg:top-24 z-20 bg-white border-b border-cream-dark shadow-sm">
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex gap-2 overflow-x-auto scrollbar-none py-3">
         {[{id:'all', name:'Tous'}, ...categories].map(cat => (
