@@ -48,14 +48,37 @@ const currentPath = Astro.url.pathname;
         <span class="hamburger-line"></span>
       </button>
 
-      <!-- Logo with pill wrapper -->
-      <a href="/" class="flex-shrink-0" aria-label="Maison Khoudia">
-        <div id="logo-pill" class="transition-all duration-500 rounded-xl px-3 py-1" style="background:rgba(255,255,255,0.90);">
-          <img id="main-logo" src="/logo.png" alt="Maison Khoudia"
-               class="h-10 md:h-12 w-auto object-contain transition-all duration-500 hover:opacity-80"
-               style="mix-blend-mode:multiply;"
-               loading="eager" />
-        </div>
+      <!-- Logo SVG inline — currentColor adapts to dark/light context -->
+      <a href="/" id="logo-container" class="flex-shrink-0 transition-colors duration-500 hover:opacity-80" aria-label="Maison Khoudia" style="color:white;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 185" class="h-14 md:h-16 w-auto" aria-hidden="true">
+          <!-- Dress icon -->
+          <g transform="translate(14,16)" opacity="0.75">
+            <path d="M10 0 L6 7 L0 5 L3 22 L17 22 L20 5 L14 7 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M7 0 Q10 3 13 0" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </g>
+          <!-- Handbag icon -->
+          <g transform="translate(12,145)" opacity="0.75">
+            <rect x="0" y="8" width="22" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M6 8 C6 2 16 2 16 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="0" y1="14" x2="22" y2="14" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
+          </g>
+          <!-- Heel icon -->
+          <g transform="translate(183,14)" opacity="0.75">
+            <path d="M2 20 C6 20 11 18 14 13 L18 3 L21 3 L21 5 C18 5 16 10 16 15 C19 15 22 17 22 20 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+          </g>
+          <!-- Ring icon -->
+          <g transform="translate(184,146)" opacity="0.75">
+            <circle cx="11" cy="14" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M4 10 L7 4 L15 4 L18 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M7 4 L11 7 L15 4" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linejoin="round"/>
+          </g>
+          <!-- MK Monogram -->
+          <text x="110" y="128" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700" font-size="100" fill="currentColor" text-anchor="middle" letter-spacing="-3">MK</text>
+          <!-- Divider -->
+          <line x1="42" y1="152" x2="178" y2="152" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+          <!-- Brand name -->
+          <text x="110" y="171" font-family="Arial,'Helvetica Neue',sans-serif" font-weight="400" font-size="10.5" fill="currentColor" text-anchor="middle" letter-spacing="5.5">MAISON KHOUDIA</text>
+        </svg>
       </a>
 
       <!-- Desktop nav -->
@@ -108,7 +131,15 @@ const currentPath = Astro.url.pathname;
 <!-- Mobile menu -->
 <nav id="mobile-menu" class="mobile-menu lg:hidden" role="navigation" aria-hidden="true">
   <div class="flex items-center justify-between p-6 border-b border-cream-dark">
-    <img src="/logo.png" alt="Maison Khoudia" class="h-14 w-auto object-contain" style="mix-blend-mode: multiply;" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 185" class="h-14 w-auto" style="color:#D4AF37;" aria-label="Maison Khoudia">
+      <g transform="translate(14,16)" opacity="0.75"><path d="M10 0 L6 7 L0 5 L3 22 L17 22 L20 5 L14 7 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M7 0 Q10 3 13 0" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></g>
+      <g transform="translate(12,145)" opacity="0.75"><rect x="0" y="8" width="22" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 8 C6 2 16 2 16 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="0" y1="14" x2="22" y2="14" stroke="currentColor" stroke-width="0.8" opacity="0.6"/></g>
+      <g transform="translate(183,14)" opacity="0.75"><path d="M2 20 C6 20 11 18 14 13 L18 3 L21 3 L21 5 C18 5 16 10 16 15 C19 15 22 17 22 20 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/></g>
+      <g transform="translate(184,146)" opacity="0.75"><circle cx="11" cy="14" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M4 10 L7 4 L15 4 L18 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M7 4 L11 7 L15 4" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linejoin="round"/></g>
+      <text x="110" y="128" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700" font-size="100" fill="currentColor" text-anchor="middle" letter-spacing="-3">MK</text>
+      <line x1="42" y1="152" x2="178" y2="152" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+      <text x="110" y="171" font-family="Arial,'Helvetica Neue',sans-serif" font-weight="400" font-size="10.5" fill="currentColor" text-anchor="middle" letter-spacing="5.5">MAISON KHOUDIA</text>
+    </svg>
     <button onclick="closeMobileMenu()" class="w-10 h-10 flex items-center justify-center text-luxury-gray hover:text-gold transition-colors" aria-label="Fermer">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
@@ -149,16 +180,19 @@ const currentPath = Astro.url.pathname;
 </nav>
 
 <style>
-  /* Hero mode (transparent header over dark bg) */
-  #main-header[data-mode="hero"] .nav-link { color: rgba(255,255,255,0.85); }
+  /* Hero mode: transparent header over dark background */
+  #main-header[data-mode="hero"] .nav-link      { color: rgba(255,255,255,0.85); }
   #main-header[data-mode="hero"] .nav-link:hover { color: #D4AF37; }
-  #main-header[data-mode="hero"] .icon-btn { color: rgba(255,255,255,0.80); }
+  #main-header[data-mode="hero"] .icon-btn      { color: rgba(255,255,255,0.80); }
   #main-header[data-mode="hero"] .hamburger-line { background: rgba(255,255,255,0.90); }
 
-  /* Scrolled mode (white header) */
-  #main-header[data-mode="scrolled"] .nav-link { color: #1A1A1A; }
-  #main-header[data-mode="scrolled"] .icon-btn { color: #1A1A1A; }
+  /* Scrolled mode: white background */
+  #main-header[data-mode="scrolled"] .nav-link      { color: #1A1A1A; }
+  #main-header[data-mode="scrolled"] .icon-btn      { color: #1A1A1A; }
   #main-header[data-mode="scrolled"] .hamburger-line { background: #1A1A1A; }
+
+  /* Logo color transitions */
+  #logo-container { transition: color 0.4s ease; }
 </style>
 
 <script>
@@ -193,11 +227,11 @@ const currentPath = Astro.url.pathname;
     btn?.setAttribute('aria-expanded', String(!isOpen));
   }
 
-  const headerEl   = document.getElementById('main-header') as HTMLElement;
-  const headerBg   = document.getElementById('header-bg') as HTMLElement;
-  const annBar     = document.getElementById('announcement-bar') as HTMLElement;
-  const logoPill   = document.getElementById('logo-pill') as HTMLElement;
-  const heroEl     = document.querySelector('.hero') as HTMLElement;
+  const headerEl      = document.getElementById('main-header') as HTMLElement;
+  const headerBg      = document.getElementById('header-bg') as HTMLElement;
+  const annBar        = document.getElementById('announcement-bar') as HTMLElement;
+  const logoContainer = document.getElementById('logo-container') as HTMLElement;
+  const heroEl        = document.querySelector('.hero') as HTMLElement;
 
   function applyMode(scrolled: boolean) {
     headerEl.dataset.mode = scrolled ? 'scrolled' : 'hero';
@@ -212,18 +246,15 @@ const currentPath = Astro.url.pathname;
 
     // Announcement bar: hide on scroll
     if (annBar) {
-      annBar.style.maxHeight = scrolled ? '0' : '40px';
-      annBar.style.opacity   = scrolled ? '0' : '1';
+      annBar.style.maxHeight  = scrolled ? '0' : '40px';
+      annBar.style.opacity    = scrolled ? '0' : '1';
       annBar.style.transition = 'max-height 0.4s ease, opacity 0.3s ease';
-      annBar.style.overflow  = 'hidden';
+      annBar.style.overflow   = 'hidden';
     }
 
-    // Logo pill: white badge on dark bg, transparent on white bg
-    if (logoPill) {
-      logoPill.style.background    = scrolled ? 'transparent' : 'rgba(255,255,255,0.90)';
-      logoPill.style.backdropFilter= scrolled ? 'none' : 'blur(4px)';
-      logoPill.style.borderRadius  = scrolled ? '0' : '10px';
-      logoPill.style.padding       = scrolled ? '0' : '4px 12px';
+    // Logo color: white on dark hero, gold on white header
+    if (logoContainer) {
+      logoContainer.style.color = scrolled ? '#D4AF37' : 'white';
     }
   }
 
