@@ -2,47 +2,42 @@
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import Footer from '../../components/Footer.astro';
-import { products, categories, formatPrice } from '../../data/products.js';
+import { products, categories } from '../../data/products.js';
 ---
 <Layout title="Boutique — Maison Khoudia">
-  <!-- Hero Boutique -->
-  <div class="relative overflow-hidden" style="min-height:55vh;">
-    <img src="/products/p1.jpg" alt="Boutique Maison Khoudia" class="absolute inset-0 w-full h-full object-cover object-top" loading="eager" />
-    <div class="absolute inset-0" style="background:linear-gradient(110deg,rgba(20,8,2,0.92) 0%,rgba(20,8,2,0.70) 45%,rgba(20,8,2,0.25) 75%);"></div>
-    <div class="relative z-10 flex items-center min-h-[55vh] px-4 sm:px-14 lg:px-24">
-      <div class="max-w-8xl mx-auto w-full">
-        <nav class="breadcrumb mb-6">
-          <a href="/" class="text-cream-light/50 hover:text-gold">Accueil</a><span class="text-gold/40">›</span><span class="text-gold">Boutique</span>
-        </nav>
-        <div class="max-w-xl">
-          <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold/70 mb-4">Nos Collections</p>
-          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-light leading-[0.95] mb-5">
-            Toute la<br/><em class="text-gold not-italic">Boutique</em>
-          </h1>
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-10 h-px bg-gold"></div>
-            <span class="text-gold/50 text-sm">◈</span>
-          </div>
-          <p class="font-sans text-cream-light/60 text-base leading-relaxed max-w-sm">
-            Explorez toutes nos collections — mode femme, homme, enfants et accessoires de luxe.
-          </p>
-        </div>
+
+  <!-- Compact page header (no big hero) -->
+  <div class="pt-24 sm:pt-28 pb-5 px-4 sm:px-6 lg:px-8 bg-white border-b border-cream-dark">
+    <div class="max-w-8xl mx-auto">
+      <nav class="breadcrumb mb-2">
+        <a href="/" class="text-luxury-gray hover:text-gold">Accueil</a>
+        <span class="text-gold/40 mx-1.5">›</span>
+        <span class="text-gold">Boutique</span>
+      </nav>
+      <div class="flex items-end justify-between gap-4">
+        <h1 class="font-serif text-2xl sm:text-3xl font-semibold text-luxury-black">Boutique</h1>
+        <span id="count-label" class="font-sans text-sm text-luxury-gray mb-0.5">{products.length} articles</span>
       </div>
     </div>
   </div>
-  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-    <div class="max-w-8xl mx-auto">
 
-      <!-- Filtre catégories -->
-      <div class="flex flex-wrap items-center gap-2 mb-10">
-        {[{id:'all',name:'Tous'},...categories].map(cat => (
+  <!-- Sticky filter bar -->
+  <div class="sticky top-20 z-20 bg-white border-b border-cream-dark shadow-sm">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex gap-2 overflow-x-auto scrollbar-none py-3">
+        {[{id:'all', name:'Tous'}, ...categories].map(cat => (
           <button
-            class="filter-btn font-sans text-[11px] tracking-[0.18em] uppercase px-5 py-2.5 rounded-full border transition-all duration-200"
+            class="filter-btn flex-shrink-0 font-sans text-[10px] sm:text-[11px] tracking-[0.15em] uppercase px-4 py-2 rounded-full border transition-all duration-200 whitespace-nowrap"
             data-filter={cat.id}
           >{cat.name}</button>
         ))}
       </div>
+    </div>
+  </div>
 
+  <!-- Products -->
+  <section class="px-4 sm:px-6 lg:px-8 pt-6 pb-16 bg-white">
+    <div class="max-w-8xl mx-auto">
       <div id="products-grid" class="product-grid">
         {products.map(product => (
           <div class="product-item" data-category={product.category}>
@@ -50,20 +45,20 @@ import { products, categories, formatPrice } from '../../data/products.js';
           </div>
         ))}
       </div>
-
-      <!-- Pagination -->
-      <div id="pagination" class="flex items-center justify-center gap-2 mt-14"></div>
-
+      <div id="pagination" class="flex items-center justify-center gap-2 mt-10"></div>
     </div>
   </section>
+
   <Footer />
 </Layout>
 
 <style>
-  .filter-btn { background:#fff; color:#6B6B6B; border-color:#E8E0D5; }
+  .filter-btn { background:#fff; color:#8B8B8B; border-color:#E8E0D5; }
   .filter-btn:hover { border-color:#D4AF37; color:#D4AF37; }
-  .filter-btn.active { background:#D4AF37; color:#2C1810; border-color:#D4AF37; }
-  .page-btn { width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-family:sans-serif; font-size:13px; border:1px solid #E8E0D5; color:#6B6B6B; transition:all .2s; cursor:pointer; }
+  .filter-btn.active { background:#D4AF37; color:#2C1810; border-color:#D4AF37; font-weight:700; }
+  .scrollbar-none::-webkit-scrollbar { display:none; }
+  .scrollbar-none { -ms-overflow-style:none; scrollbar-width:none; }
+  .page-btn { width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-family:sans-serif; font-size:13px; border:1px solid #E8E0D5; color:#6B6B6B; transition:all .2s; cursor:pointer; }
   .page-btn:hover { border-color:#D4AF37; color:#D4AF37; }
   .page-btn.active { background:#D4AF37; color:#2C1810; border-color:#D4AF37; font-weight:700; }
   .page-btn:disabled { opacity:.35; cursor:default; }
@@ -75,9 +70,9 @@ import { products, categories, formatPrice } from '../../data/products.js';
   let activeFilter = 'all';
 
   const allItems   = Array.from(document.querySelectorAll('.product-item')) as HTMLElement[];
-  const grid       = document.getElementById('products-grid')!;
   const pagination = document.getElementById('pagination')!;
   const filterBtns = document.querySelectorAll('.filter-btn');
+  const countLabel = document.getElementById('count-label')!;
 
   function getFiltered() {
     return activeFilter === 'all'
@@ -86,17 +81,17 @@ import { products, categories, formatPrice } from '../../data/products.js';
   }
 
   function render() {
-    const filtered  = getFiltered();
+    const filtered   = getFiltered();
     const totalPages = Math.ceil(filtered.length / PER_PAGE);
     currentPage = Math.min(currentPage, totalPages || 1);
     const start = (currentPage - 1) * PER_PAGE;
     const end   = start + PER_PAGE;
 
-    // Show/hide items
     allItems.forEach(el => { el.style.display = 'none'; });
     filtered.slice(start, end).forEach(el => { el.style.display = ''; });
 
-    // Pagination buttons
+    if (countLabel) countLabel.textContent = `${filtered.length} article${filtered.length > 1 ? 's' : ''}`;
+
     pagination.innerHTML = '';
     if (totalPages <= 1) return;
 
@@ -133,7 +128,6 @@ import { products, categories, formatPrice } from '../../data/products.js';
     });
   });
 
-  // Init
   document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
   render();
 </script>
