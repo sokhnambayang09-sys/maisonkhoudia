@@ -9,12 +9,12 @@ const previewProducts = products.filter(p => p.new || p.bestseller).slice(0, 8);
 <section class="hero relative h-screen sm:h-[82vh] min-h-[600px] sm:min-h-[500px] sm:max-h-[820px] overflow-hidden bg-brown" aria-label="Hero — Maison Khoudia">
 
   <!-- Background avec parallax + Ken Burns -->
-  <div class="hero-bg-wrap absolute inset-[-8%] will-change-transform">
+  <div class="hero-bg-wrap absolute inset-0 will-change-transform">
     <img
       src="/hero-campaign.png"
       alt="Maison Khoudia"
-      class="w-full h-full object-cover object-center"
-      style="animation: kenBurns 20s ease-in-out infinite alternate; transform-origin: center;"
+      class="w-full h-full object-cover"
+      style="object-position:65% center; animation: kenBurns 20s ease-in-out infinite alternate; transform-origin: right center;"
       loading="eager"
       decoding="async"
     />

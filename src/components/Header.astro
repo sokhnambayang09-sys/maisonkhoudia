@@ -49,7 +49,7 @@ const currentPath = Astro.url.pathname;
       </button>
 
       <!-- Logo SVG inline — currentColor adapts to dark/light context -->
-      <a href="/" id="logo-container" class="flex-shrink-0 transition-colors duration-500 hover:opacity-80" aria-label="Maison Khoudia" style="color:white;">
+      <a href="/" id="logo-container" class="flex-shrink-0 hover:opacity-80" aria-label="Maison Khoudia" style="color:#D4AF37;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 185" class="h-14 md:h-16 w-auto" aria-hidden="true">
           <!-- Dress icon -->
           <g transform="translate(14,16)" opacity="0.75">
@@ -252,9 +252,9 @@ const currentPath = Astro.url.pathname;
       annBar.style.overflow   = 'hidden';
     }
 
-    // Logo color: white on dark hero, gold on white header
+    // Logo: always gold
     if (logoContainer) {
-      logoContainer.style.color = scrolled ? '#D4AF37' : 'white';
+      logoContainer.style.color = '#D4AF37';
     }
   }
 
