@@ -244,6 +244,14 @@ const currentPath = Astro.url.pathname;
       headerBg.style.boxShadow      = scrolled ? '0 2px 20px rgba(0,0,0,0.07)' : 'none';
     }
 
+    // Nav links color — force via JS (CSS scoping can be unreliable)
+    const navColor   = scrolled ? '#1A1A1A' : 'rgba(255,255,255,0.85)';
+    const iconColor  = scrolled ? '#1A1A1A' : 'rgba(255,255,255,0.80)';
+    const hamColor   = scrolled ? '#1A1A1A' : 'rgba(255,255,255,0.90)';
+    document.querySelectorAll<HTMLElement>('#main-header .nav-link').forEach(el => { el.style.color = navColor; });
+    document.querySelectorAll<HTMLElement>('#main-header .icon-btn').forEach(el => { el.style.color = iconColor; });
+    document.querySelectorAll<HTMLElement>('#main-header .hamburger-line').forEach(el => { el.style.background = hamColor; });
+
     // Announcement bar: hide on scroll
     if (annBar) {
       annBar.style.maxHeight  = scrolled ? '0' : '40px';
