@@ -262,7 +262,7 @@ const currentPath = Astro.url.pathname;
   const hasHero = !!heroEl;
   applyMode(!hasHero);
 
-  const threshold = heroEl ? Math.max(heroEl.offsetHeight - 100, 60) : 60;
+  const threshold = 80;
   window.addEventListener('scroll', () => {
     applyMode(window.scrollY > threshold);
   }, { passive: true });
