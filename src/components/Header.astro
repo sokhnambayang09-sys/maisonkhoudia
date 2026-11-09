@@ -13,7 +13,7 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header id="main-header" data-mode="hero" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400" role="banner">
+<header id="main-header" data-mode="scrolled" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400" role="banner">
 
   <!-- Background layer -->
   <div id="header-bg" class="absolute inset-0 border-b border-transparent transition-all duration-400"></div>
@@ -258,9 +258,9 @@ const currentPath = Astro.url.pathname;
     }
   }
 
-  // Initialize: if no dark hero, start in scrolled mode
+  // Initialize: hero mode only on pages that have a .hero section
   const hasHero = !!heroEl;
-  applyMode(!hasHero);
+  applyMode(!hasHero); // scrolled=true when no hero, scrolled=false when hero present
 
   const threshold = 80;
   window.addEventListener('scroll', () => {
