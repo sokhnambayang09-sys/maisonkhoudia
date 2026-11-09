@@ -151,4 +151,32 @@
 
   .writing-vertical { writing-mode: vertical-rl; text-orientation: mixed; }
   .product-grid { @apply grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6; }
+
+  /* Pinterest masonry */
+  .masonry-grid {
+    columns: 2;
+    column-gap: 10px;
+  }
+  @media (min-width: 640px) {
+    .masonry-grid { columns: 3; column-gap: 14px; }
+  }
+  @media (min-width: 1280px) {
+    .masonry-grid { columns: 4; column-gap: 16px; }
+  }
+  .masonry-grid > article,
+  .masonry-grid > .product-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .masonry-grid > article,
+    .masonry-grid > .product-item { margin-bottom: 14px; }
+  }
+  @media (min-width: 1280px) {
+    .masonry-grid > article,
+    .masonry-grid > .product-item { margin-bottom: 16px; }
+  }
 }

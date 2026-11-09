@@ -38,10 +38,10 @@ import { products, categories } from '../../data/products.js';
   <!-- Products -->
   <section class="px-4 sm:px-6 lg:px-8 pt-6 pb-16 bg-white">
     <div class="max-w-8xl mx-auto">
-      <div id="products-grid" class="product-grid">
-        {products.map(product => (
+      <div id="products-grid" class="masonry-grid">
+        {products.map((product, i) => (
           <div class="product-item" data-category={product.category}>
-            <ProductCard {...product} />
+            <ProductCard {...product} tall={i % 3 === 0} />
           </div>
         ))}
       </div>
