@@ -22,7 +22,7 @@ import { products, categories } from '../../data/products.js';
   </div>
 
   <!-- Sticky filter bar -->
-  <div class="sticky top-20 lg:top-24 z-20 bg-white border-b border-cream-dark shadow-sm">
+  <div class="sticky top-20 md:top-24 z-20 bg-white border-b border-cream-dark shadow-sm">
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex gap-2 overflow-x-auto scrollbar-none py-3">
         {[{id:'all', name:'Tous'}, ...categories].map(cat => (
@@ -65,6 +65,14 @@ import { products, categories } from '../../data/products.js';
 </style>
 
 <script>
+  function scrollToGrid() {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    const offset = 160; // header (96px) + filter bar (~48px) + gap
+    const top = grid.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
   const PER_PAGE = 12;
   let currentPage = 1;
   let activeFilter = 'all';
@@ -99,14 +107,14 @@ import { products, categories } from '../../data/products.js';
     prev.className = 'page-btn';
     prev.innerHTML = '‹';
     prev.disabled = currentPage === 1;
-    prev.onclick = () => { currentPage--; render(); window.scrollTo({top:0,behavior:'smooth'}); };
+    prev.onclick = () => { currentPage--; render(); scrollToGrid(); };
     pagination.appendChild(prev);
 
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement('button');
       btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
       btn.textContent = String(i);
-      btn.onclick = ((_i) => () => { currentPage = _i; render(); window.scrollTo({top:0,behavior:'smooth'}); })(i);
+      btn.onclick = ((_i) => () => { currentPage = _i; render(); scrollToGrid(); })(i);
       pagination.appendChild(btn);
     }
 
@@ -114,7 +122,7 @@ import { products, categories } from '../../data/products.js';
     next.className = 'page-btn';
     next.innerHTML = '›';
     next.disabled = currentPage === totalPages;
-    next.onclick = () => { currentPage++; render(); window.scrollTo({top:0,behavior:'smooth'}); };
+    next.onclick = () => { currentPage++; render(); scrollToGrid(); };
     pagination.appendChild(next);
   }
 

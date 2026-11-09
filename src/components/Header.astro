@@ -193,6 +193,14 @@ const currentPath = Astro.url.pathname;
 
   /* Logo color transitions */
   #logo-container { transition: color 0.4s ease; }
+
+  /* Header background before JS — white on non-hero pages */
+  #main-header[data-mode="scrolled"] #header-bg {
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(16px);
+    border-color: rgba(0,0,0,0.07);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  }
 </style>
 
 <script>
